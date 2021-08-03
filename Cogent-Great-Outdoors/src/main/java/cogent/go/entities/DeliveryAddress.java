@@ -2,6 +2,8 @@ package cogent.go.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -10,6 +12,7 @@ import javax.validation.constraints.Size;
 @Table(name = "delivery_address_table", schema = "greatoutdoors")
 public class DeliveryAddress {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "address_id")
 	private int addressId;
 	@Size(max = 60)
