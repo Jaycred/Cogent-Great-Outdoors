@@ -12,10 +12,10 @@ public class Cart {
 	@Id
 	private int cartId;
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "id")
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
 	@ManyToOne
-	@JoinColumn(name = "productId", referencedColumnName = "id")
+	@JoinColumn(name = "product_id", referencedColumnName = "id")
 	private Product product;
 	private int quantity;
 	private int price;

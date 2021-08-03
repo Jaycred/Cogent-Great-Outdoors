@@ -1,13 +1,18 @@
 package cogent.go.entities;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 @Entity
 public class User {
 	
 	@Id
+	@Column(name = "user_id")
 	private int id;
 	
 	@Size(max = 30)
@@ -27,6 +32,11 @@ public class User {
 	@Size(max = 30)
 	private String state;
 	private int pincode;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Order> orderList;
+	@OneToMany(mappedBy = "user")
+	private List<Cart> cartList;
 	
 	public User() {
 		super();

@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Table(name = "delivery_address_table", schema = "greatoutdoors")
 public class DeliveryAddress {
 	@Id
-	@Column(name = "addressId")
+	@Column(name = "address_id")
 	private int id;
 	@Size(max = 60)
 	private String addressLine1;

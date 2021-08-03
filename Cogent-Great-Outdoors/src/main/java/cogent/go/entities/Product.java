@@ -1,12 +1,17 @@
 package cogent.go.entities;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 @Entity
 public class Product {
 	@Id
+	@Column(name = "product_id")
 	private int id;
 	@Size(max = 30)
 	private String name;
@@ -15,6 +20,12 @@ public class Product {
 	private int price;
 	@Size(max = 20)
 	private String category;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Order> orderList;
+	@OneToMany(mappedBy = "user")
+	private List<Cart> cartList;
+	
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
