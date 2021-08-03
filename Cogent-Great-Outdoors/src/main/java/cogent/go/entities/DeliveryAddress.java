@@ -13,8 +13,10 @@ public class DeliveryAddress {
 	@Column(name = "address_id")
 	private int addressId;
 	@Size(max = 60)
+	@Column(name = "address_line_1")
 	private String addressLine1;
 	@Size(max = 60)
+	@Column(name = "address_line_2")
 	private String addressLine2;
 	@Size(max = 30)
 	private String state;
