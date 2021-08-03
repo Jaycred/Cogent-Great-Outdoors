@@ -12,7 +12,7 @@ public class DeliveryAddressService {
 	@Autowired
 	private DeliveryAddressRepository repository;
 	
-	public DeliveryAddress saveProduct(DeliveryAddress address) {
+	public DeliveryAddress saveAddress(DeliveryAddress address) {
         return repository.save(address);
     }
 }

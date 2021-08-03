@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cogent.go.entities.Product;
-import cogent.go.service.ProductService;
+import cogent.go.entities.User;
+import cogent.go.service.UserService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/go/product")
-public class ProductController {
+@RequestMapping("/go/user")
+public class UserController {
 	
 	@Autowired
-    private ProductService service;
+    private UserService service;
 	
-	@PostMapping("/addProduct")
-    public ResponseEntity<String> addProduct(@RequestBody Product product) {
-        service.saveProduct(product);
-        return new ResponseEntity<>(product.getName() + " was added.", HttpStatus.OK);
+	@PostMapping("/addUser")
+    public ResponseEntity<String> addUser(@RequestBody User user) {
+        service.saveUser(user);
+        return new ResponseEntity<>(user.getFirstName() + " was added.", HttpStatus.OK);
     }
 }

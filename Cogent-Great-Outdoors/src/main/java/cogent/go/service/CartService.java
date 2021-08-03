@@ -12,7 +12,7 @@ public class CartService {
 	@Autowired
 	private CartRepository repository;
 	
-	public Cart saveProduct(Cart cart) {
+	public Cart saveCart(Cart cart) {
         return repository.save(cart);
     }
 }

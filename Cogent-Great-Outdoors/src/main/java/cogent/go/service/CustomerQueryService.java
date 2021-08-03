@@ -12,7 +12,7 @@ public class CustomerQueryService {
 	@Autowired
 	private CustomerQueryRepository repository;
 	
-	public CustomerQuery saveProduct(CustomerQuery query) {
+	public CustomerQuery saveQuery(CustomerQuery query) {
         return repository.save(query);
     }
 }
