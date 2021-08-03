@@ -7,10 +7,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order_table", schema = "greatoutdoors")
-public class Order {
+@Table(name = "cart_table", schema = "greatoutdoors")
+public class Cart {
 	@Id
-	private int orderId;
+	private int cartId;
 	@ManyToOne
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
@@ -19,23 +19,23 @@ public class Order {
 	private Product product;
 	private int quantity;
 	private int price;
-	public Order() {
+	public Cart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Order(int orderId, User user, Product product, int quantity, int price) {
+	public Cart(int cartId, User user, Product product, int quantity, int price) {
 		super();
-		this.orderId = orderId;
+		this.cartId = cartId;
 		this.user = user;
 		this.product = product;
 		this.quantity = quantity;
 		this.price = price;
 	}
-	public int getOrderId() {
-		return orderId;
+	public int getCartId() {
+		return cartId;
 	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 	public User getUser() {
 		return user;
