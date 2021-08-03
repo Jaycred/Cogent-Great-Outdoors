@@ -11,5 +11,5 @@ import cogent.go.entities.User;
 @CrossOrigin()
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	Page<User> findByNameContaining(@RequestParam("firstName") String name, Pageable pageable);
+	Page<User> findByFirstNameContaining(@RequestParam("firstName") String name, Pageable pageable);
 }
