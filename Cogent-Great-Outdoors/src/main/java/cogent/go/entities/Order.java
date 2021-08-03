@@ -1,5 +1,6 @@
 package cogent.go.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "order_table", schema = "greatoutdoors")
 public class Order {
 	@Id
+	@Column(name = "order_id")
 	private int orderId;
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")

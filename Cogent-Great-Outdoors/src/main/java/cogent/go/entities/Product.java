@@ -12,9 +12,10 @@ import javax.validation.constraints.Size;
 public class Product {
 	@Id
 	@Column(name = "product_id")
-	private int id;
+	private int productId;
 	@Size(max = 30)
-	private String name;
+	@Column(name = "product_name")
+	private String productName;
 	@Size(max = 200)
 	private String description;
 	private int price;
@@ -33,23 +34,23 @@ public class Product {
 	public Product(int id, @Size(max = 30) String name, @Size(max = 200) String description, int price,
 			@Size(max = 20) String category) {
 		super();
-		this.id = id;
-		this.name = name;
+		this.productId = id;
+		this.productName = name;
 		this.description = description;
 		this.price = price;
 		this.category = category;
 	}
 	public int getId() {
-		return id;
+		return productId;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.productId = id;
 	}
 	public String getName() {
-		return name;
+		return productName;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.productName = name;
 	}
 	public String getDescription() {
 		return description;

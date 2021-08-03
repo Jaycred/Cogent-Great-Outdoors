@@ -1,5 +1,6 @@
 package cogent.go.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -10,12 +11,13 @@ import javax.persistence.Table;
 @Table(name = "cart_table", schema = "greatoutdoors")
 public class Cart {
 	@Id
+	@Column(name = "cart_id")
 	private int cartId;
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
 	@ManyToOne
-	@JoinColumn(name = "product_id", referencedColumnName = "id")
+	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
 	private Product product;
 	private int quantity;
 	private int price;

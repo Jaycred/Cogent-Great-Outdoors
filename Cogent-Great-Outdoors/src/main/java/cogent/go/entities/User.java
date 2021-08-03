@@ -13,21 +13,26 @@ public class User {
 	
 	@Id
 	@Column(name = "user_id")
-	private int id;
+	private int userId;
 	
 	@Size(max = 30)
+	@Column(name = "first_name")
 	private String firstName;
 	@Size(max = 30)
+	@Column(name = "last_name")
 	private String lastName;
 	@Size(max = 10)
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	@Size(max = 30)
 	private String email;
 	@Size(max = 30)
 	private String password;
 	@Size(max = 60)
+	@Column(name = "address_line_1")
 	private String addressLine1;
 	@Size(max = 60)
+	@Column(name = "address_line_2")
 	private String addressLine2;
 	@Size(max = 30)
 	private String state;
@@ -46,7 +51,7 @@ public class User {
 	public User(int id, String firstName, String lastName, String phoneNumber, String email, String password,
 			String addressLine1, String addressLine2, String state, int pincode) {
 		super();
-		this.id = id;
+		this.userId = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
@@ -59,10 +64,10 @@ public class User {
 	}
 	
 	public int getId() {
-		return id;
+		return userId;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.userId = id;
 	}
 	public String getFirstName() {
 		return firstName;
