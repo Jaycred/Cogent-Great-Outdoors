@@ -21,6 +21,7 @@ public class Order {
 	private Product product;
 	private int quantity;
 	private int price;
+	
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
