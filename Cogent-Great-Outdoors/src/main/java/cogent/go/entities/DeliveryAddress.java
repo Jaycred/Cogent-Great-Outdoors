@@ -10,11 +10,13 @@ import javax.validation.constraints.Size;
 @Table(name = "delivery_address_table", schema = "greatoutdoors")
 public class DeliveryAddress {
 	@Id
-	@Column(name = "addressId")
-	private int id;
+	@Column(name = "address_id")
+	private int addressId;
 	@Size(max = 60)
+	@Column(name = "address_line_1")
 	private String addressLine1;
 	@Size(max = 60)
+	@Column(name = "address_line_2")
 	private String addressLine2;
 	@Size(max = 30)
 	private String state;
@@ -28,7 +30,7 @@ public class DeliveryAddress {
 	public DeliveryAddress(int id, @Size(max = 60) String addressLine1, @Size(max = 60) String addressLine2,
 			@Size(max = 30) String state, int pincode) {
 		super();
-		this.id = id;
+		this.addressId = id;
 		this.addressLine1 = addressLine1;
 		this.addressLine2 = addressLine2;
 		this.state = state;
@@ -36,11 +38,11 @@ public class DeliveryAddress {
 	}
 
 	public int getId() {
-		return id;
+		return addressId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.addressId = id;
 	}
 
 	public String getAddressLine1() {

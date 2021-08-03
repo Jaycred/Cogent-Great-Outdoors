@@ -1,32 +1,47 @@
 package cogent.go.entities;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 @Entity
 public class User {
 	
 	@Id
-	private int id;
+	@Column(name = "user_id")
+	private int userId;
 	
 	@Size(max = 30)
+	@Column(name = "first_name")
 	private String firstName;
 	@Size(max = 30)
+	@Column(name = "last_name")
 	private String lastName;
 	@Size(max = 10)
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	@Size(max = 30)
 	private String email;
 	@Size(max = 30)
 	private String password;
 	@Size(max = 60)
+	@Column(name = "address_line_1")
 	private String addressLine1;
 	@Size(max = 60)
+	@Column(name = "address_line_2")
 	private String addressLine2;
 	@Size(max = 30)
 	private String state;
 	private int pincode;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Order> orderList;
+	@OneToMany(mappedBy = "user")
+	private List<Cart> cartList;
 	
 	public User() {
 		super();
@@ -36,7 +51,7 @@ public class User {
 	public User(int id, String firstName, String lastName, String phoneNumber, String email, String password,
 			String addressLine1, String addressLine2, String state, int pincode) {
 		super();
-		this.id = id;
+		this.userId = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
@@ -49,10 +64,10 @@ public class User {
 	}
 	
 	public int getId() {
-		return id;
+		return userId;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.userId = id;
 	}
 	public String getFirstName() {
 		return firstName;

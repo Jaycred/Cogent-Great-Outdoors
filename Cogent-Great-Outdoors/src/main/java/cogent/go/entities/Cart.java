@@ -1,23 +1,18 @@
 package cogent.go.entities;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order_table", schema = "greatoutdoors")
-public class Order {
+@Table(name = "cart_table", schema = "greatoutdoors")
+public class Cart {
 	@Id
-	@Column(name = "order_id")
-	private int orderId;
+	@Column(name = "cart_id")
+	private int cartId;
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
@@ -26,28 +21,23 @@ public class Order {
 	private Product product;
 	private int quantity;
 	private int price;
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "order_address_table", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
-	private Set<DeliveryAddress> daList;
-	
-	public Order() {
+	public Cart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Order(int orderId, User user, Product product, int quantity, int price) {
+	public Cart(int cartId, User user, Product product, int quantity, int price) {
 		super();
-		this.orderId = orderId;
+		this.cartId = cartId;
 		this.user = user;
 		this.product = product;
 		this.quantity = quantity;
 		this.price = price;
 	}
-	public int getOrderId() {
-		return orderId;
+	public int getCartId() {
+		return cartId;
 	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 	public User getUser() {
 		return user;
