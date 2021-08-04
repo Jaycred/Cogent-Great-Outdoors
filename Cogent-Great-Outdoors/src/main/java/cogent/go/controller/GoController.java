@@ -31,7 +31,7 @@ public class GoController {
 	@PostMapping("/addProduct")
     public ResponseEntity<String> addProduct(@RequestBody Product product) {
         service.saveProduct(product);
-        return new ResponseEntity<>(product.getName() + " was added.", HttpStatus.OK);
+        return new ResponseEntity<>(product.getProductName() + " was added.", HttpStatus.OK);
     }
 	
 	@PostMapping("/addAddress")
