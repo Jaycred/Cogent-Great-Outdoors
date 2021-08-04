@@ -1,27 +1,29 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PlaceOrderComponent } from './ui/place-order/place-order.component';
 
 const route: Routes = [
-  /*{path: 'products/category/:cid', component: ProductListComponent},
-  {path: 'products', component: ProductListComponent},
-  {path: 'products/add', component: ProductAddComponent},
-  {path: 'products/addT', component: ProductAddTComponent},
-  {path: 'products/:id', component: ProductDetailsComponent},
-  {path: 'search/:keyword', component: ProductListComponent},
-  {path: '**', redirectTo: '/products', pathMatch: 'full'}*/
+  {path: '**', redirectTo: '/', pathMatch: 'full'}
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PlaceOrderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    RouterModule.forRoot(route),
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
