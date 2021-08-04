@@ -39,10 +39,10 @@ public class Product {
 		this.price = price;
 		this.category = category;
 	}
-	public int getId() {
+	public int getProductId() {
 		return productId;
 	}
-	public void setId(int id) {
+	public void setProductId(int id) {
 		this.productId = id;
 	}
 	public String getProductName() {
