@@ -14,5 +14,5 @@ import cogent.go.entities.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	Page<Product> findByCategory(@RequestParam("productId") String id, Pageable pageable);
 
-	Page<Product> findByNameContaining(@RequestParam("productName") String name, Pageable pageable);
+	Page<Product> findByProductNameContaining(@RequestParam("productName") String productName, Pageable pageable);
 }
