@@ -18,6 +18,7 @@ public class User {
 	@Column(name = "user_id")
 	private int userId;
 	
+	
 	@Size(max = 30)
 	@Column(name = "first_name")
 	private String firstName;
