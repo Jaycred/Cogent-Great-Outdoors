@@ -49,6 +49,7 @@ public class GoController {
         return new ResponseEntity<>(user.getFirstName() + " was added.", HttpStatus.OK);
     }
 	
+	
 	@PostMapping("/createQuery")
     public ResponseEntity<String> addQuery(@RequestBody CustomerQuery query) {
         service.saveQuery(query);

@@ -17,8 +17,6 @@ public class Product {
 	@Column(name = "product_id")
 	private int productId;
 
-
-
 	@Size(max = 30)
 	@Column(name = "product_name")
 	private String productName;
@@ -27,11 +25,6 @@ public class Product {
 	private int price;
 	@Size(max = 20)
 	private String category;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Order> orderList;
-	@OneToMany(mappedBy = "user")
-	private List<Cart> cartList;
 	
 	public Product() {
 		super();
