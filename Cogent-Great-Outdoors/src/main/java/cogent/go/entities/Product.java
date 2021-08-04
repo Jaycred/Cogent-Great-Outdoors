@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Product {
 	@Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
 	private int productId;
 
