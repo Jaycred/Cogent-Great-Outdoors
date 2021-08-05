@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Product } from '../common/product';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,12 @@ export class GoServiceService {
 =======
 
 >>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
+  }
+
+  getProducts(): Observable<Product[]>
+  {
+    const url = this.baseUrl + "findAllProducts";
+    return this.httpClient.get<Product[]>(url);
   }
 
 }
