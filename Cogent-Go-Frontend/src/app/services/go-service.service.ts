@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Product } from '../common/product';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,12 @@ export class GoServiceService {
     const url = this.baseUrl+"saveCart";
     return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions).pipe(map(response => response.result));
 
+  }
+
+  getProducts(): Observable<Product[]>
+  {
+    const url = this.baseUrl + "findAllProducts";
+    return this.httpClient.get<Product[]>(url);
   }
 
 }
