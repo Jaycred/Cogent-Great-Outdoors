@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +15,7 @@ import { OrderAddComponentComponent } from './components/order-add-component/ord
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductViewComponent } from './components/product-view/product-view.component';
 import { CategoryViewComponent } from './components/category-view/category-view.component';
+
 
 const route: Routes = [
   {path: 'categories', component: CategoryViewComponent},
@@ -33,6 +35,7 @@ const route: Routes = [
     OrderAddComponentComponent,
     ProductViewComponent,
     CategoryViewComponent
+
   ],
   imports: [
     BrowserModule,
