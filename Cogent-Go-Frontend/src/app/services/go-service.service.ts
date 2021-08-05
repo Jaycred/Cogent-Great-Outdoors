@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Product } from '../common/product';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class GoServiceService {
     return this.httpClient.post<MessageResponse>(url,p,this.httpOptions).pipe(map(response => response.result));
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
   addAddress(da:any): Observable<string> {
     const url = this.baseUrl+"addAddress";
     return this.httpClient.post<MessageResponse>(url,da,this.httpOptions).pipe(map(response => response.result));
@@ -47,7 +52,21 @@ export class GoServiceService {
   addCart(cart:any): Observable<string> {
     const url = this.baseUrl+"saveCart";
     return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions).pipe(map(response => response.result));
+<<<<<<< HEAD
+=======
+  placeOrder(o:any): Observable<string> {
+    const url = this.baseUrl+"placeOrder/";
+    return this.httpClient.post<MessageResponse>(url,o,this.httpOptions).pipe(map(response => response.result));
+>>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
+=======
 
+>>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
+  }
+
+  getProducts(): Observable<Product[]>
+  {
+    const url = this.baseUrl + "findAllProducts";
+    return this.httpClient.get<Product[]>(url);
   }
 
 }

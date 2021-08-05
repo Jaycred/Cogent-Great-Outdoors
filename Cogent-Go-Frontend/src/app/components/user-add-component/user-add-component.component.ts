@@ -14,8 +14,8 @@ export class UserAddComponentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  processForm(pform: any){
-    this.gs.addUser(JSON.stringify(pform.value)).subscribe(data=>{this.message=data});
+  processForm(userForm: any){
+    this.gs.addUser(JSON.stringify(userForm.value)).subscribe(data=>{this.message=data});
   }
 
 }
