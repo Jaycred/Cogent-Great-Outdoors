@@ -49,16 +49,6 @@ export class GoServiceService {
     const url = this.baseUrl+"saveCart";
     return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions).pipe(map(response => response.result));
   }
-<<<<<<< HEAD
-=======
-
-  getProducts(): Observable<Product[]>
-  {
-    const url = this.baseUrl + "findAllProducts";
-    return this.httpClient.get<Product[]>(url);
-  }
-
->>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
 }
 
 interface MessageResponse{  
