@@ -25,6 +25,9 @@ export class GoServiceService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
   addAddress(da:any): Observable<string> {
     const url = this.baseUrl+"addAddress";
     return this.httpClient.post<MessageResponse>(url,da,this.httpOptions).pipe(map(response => response.result));
@@ -48,10 +51,14 @@ export class GoServiceService {
   addCart(cart:any): Observable<string> {
     const url = this.baseUrl+"saveCart";
     return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions).pipe(map(response => response.result));
+<<<<<<< HEAD
 =======
   placeOrder(o:any): Observable<string> {
     const url = this.baseUrl+"placeOrder/";
     return this.httpClient.post<MessageResponse>(url,o,this.httpOptions).pipe(map(response => response.result));
+>>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
+=======
+
 >>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
   }
 
