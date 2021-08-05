@@ -24,6 +24,11 @@ export class GoServiceService {
     return this.httpClient.post<MessageResponse>(url,p,this.httpOptions).pipe(map(response => response.result));
   }
 
+  placeOrder(o:any): Observable<string> {
+    const url = this.baseUrl+"placeOrder/";
+    return this.httpClient.post<MessageResponse>(url,o,this.httpOptions).pipe(map(response => response.result));
+  }
+
 }
 
 interface MessageResponse{  
