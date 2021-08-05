@@ -1,1 +1,20 @@
-<p>user-add-component works!</p>
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <form #userForm="ngForm" (ngSubmit)="processForm(userForm)">
+                <p>First Name: <input type="text" id="firstName" name="firstName" ngModel></p> <br>
+                <p>Last Name: <input type="text" id="lastName"  name="lastName" ngModel></p> <br>
+                <p>Email: <input type="text" id="email" name="email" ngModel> </p> <br>
+                <p>Password: <input type="text" id="password" name="password" ngModel> </p> <br>
+                <p>Phone Number: <input type="text" id="phoneNumber"  name="phoneNumber" ngModel> </p> <br>
+                <p>Address Line 1: <input type="text" id="addressLine1" name="addressLine1" ngModel> </p> <br>
+                <p>Address Line 2: <input type="text" id="addressLine2" name="addressLine2" ngModel>  </p> <br> 
+                <p>State: <input type="text" id="state" name="state" ngModel>  </p> <br> 
+                <p>Pincode: <input type="text" id="pincode" name="pincode" ngModel>  </p> <br> 
+                <p><input type="submit" value="submit" id="b1_submit" name="b1_submit"></p>
+            </form>
+         
+            <span id="message">{{this.message}}</span>
+        </div>
+    </div>
+</div>
