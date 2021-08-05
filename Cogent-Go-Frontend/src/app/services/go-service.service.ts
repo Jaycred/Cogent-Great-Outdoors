@@ -24,6 +24,31 @@ export class GoServiceService {
     return this.httpClient.post<MessageResponse>(url,p,this.httpOptions).pipe(map(response => response.result));
   }
 
+  addAddress(da:any): Observable<string> {
+    const url = this.baseUrl+"addAddress";
+    return this.httpClient.post<MessageResponse>(url,da,this.httpOptions).pipe(map(response => response.result));
+  }
+
+  addOrder(order:any): Observable<string> {
+    const url = this.baseUrl+"placeOrder";
+    return this.httpClient.post<MessageResponse>(url,order,this.httpOptions).pipe(map(response => response.result));
+  }
+
+  addUser(user:any): Observable<string> {
+    const url = this.baseUrl+"addUser";
+    return this.httpClient.post<MessageResponse>(url,user,this.httpOptions).pipe(map(response => response.result));
+  }
+
+  addQuery(query:any): Observable<string> {
+    const url = this.baseUrl+"createQuery";
+    return this.httpClient.post<MessageResponse>(url,query,this.httpOptions).pipe(map(response => response.result));
+  }
+
+  addCart(cart:any): Observable<string> {
+    const url = this.baseUrl+"saveCart";
+    return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions).pipe(map(response => response.result));
+  }
+
 }
 
 interface MessageResponse{  
