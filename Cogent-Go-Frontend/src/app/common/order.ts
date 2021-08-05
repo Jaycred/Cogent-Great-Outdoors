@@ -8,5 +8,5 @@ export class Order {
     product: Product;
 	quantity: number;
 	price:number;
-    da:DeliveryAddress
+    da:DeliveryAddress;
 }
