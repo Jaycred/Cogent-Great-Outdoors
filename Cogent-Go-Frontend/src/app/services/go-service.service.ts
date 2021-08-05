@@ -49,6 +49,12 @@ export class GoServiceService {
     const url = this.baseUrl+"saveCart";
     return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions).pipe(map(response => response.result));
   }
+
+  getProducts(): Observable<Product[]>
+  {
+    const url = this.baseUrl + "findAllProducts";
+    return this.httpClient.get<Product[]>(url);
+  }
 }
 
 interface MessageResponse{  
