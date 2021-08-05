@@ -30,26 +30,26 @@ public class Product {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Product(int id, @Size(max = 30) String name, @Size(max = 200) String description, int price,
+	public Product(int id, @Size(max = 30) String productName, @Size(max = 200) String description, int price,
 			@Size(max = 20) String category) {
 		super();
 		this.productId = id;
-		this.productName = name;
+		this.productName = productName;
 		this.description = description;
 		this.price = price;
 		this.category = category;
 	}
-	public int getId() {
+	public int getProductId() {
 		return productId;
 	}
-	public void setId(int id) {
+	public void setProductId(int id) {
 		this.productId = id;
 	}
-	public String getName() {
+	public String getProductName() {
 		return productName;
 	}
-	public void setName(String name) {
-		this.productName = name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 	public String getDescription() {
 		return description;
