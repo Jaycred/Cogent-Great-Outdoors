@@ -70,4 +70,5 @@ public class GoController {
 	public List<Product> getProductList(){
 		return service.getProductList();
 	}
+	
 }
