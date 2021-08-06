@@ -1,1 +1,19 @@
-<p>cart-view works!</p>
+<div class="main-content">
+    <div class="section-content section-content-p30">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-3" *ngFor="let item of cartList">
+            <div class="product-box">
+              <a routerLink="/products/{{item.product.productId}}">
+                <img src='assets/placeholder.png' class="img-responsive">
+              </a>
+              <a routerLink="/products/{{item.product.productId}}">
+                <h1>{{ item.product.productName }}</h1>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

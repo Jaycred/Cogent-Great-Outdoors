@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../common/product';
+import { Cart } from '../common/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,12 @@ export class GoServiceService {
   {
     const url = `${this.baseUrl}/findProductsByCategory?category=${cName}`;
     return this.httpClient.get<Product[]>(url);
+  }
+
+  getCart(userId: number): Observable<Cart[]>
+  {
+    const url = `${this.baseUrl}/cart?userId=${userId}`;
+    return null; //this.httpClient.get<Product[]>(url);
   }
 }
 
