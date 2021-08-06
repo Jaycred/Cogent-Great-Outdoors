@@ -70,6 +70,14 @@ public class GoController {
 	public List<Product> getProductList(){
 		return service.getProductList();
 	}
+	@GetMapping("/findProductsByCategory")
+	public List<Product> getProductList(@RequestParam ){
+		return service.getProductList();
+	}
+	@GetMapping("/findProductsById")
+	public List<Product> getProductList(){
+		return service.getProductList();
+	}
 	
 	
 	// please work
