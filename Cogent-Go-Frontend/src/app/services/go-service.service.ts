@@ -55,6 +55,18 @@ export class GoServiceService {
     const url = this.baseUrl + "findAllProducts";
     return this.httpClient.get<Product[]>(url);
   }
+
+  getProductsById(id: number): Observable<Product[]>
+  {
+    const url = this.baseUrl + ``;
+    return this.httpClient.get<Product[]>(url);
+  }
+  getProductsByCategory(cName: string): Observable<Product[]>
+  {
+    const url = this.baseUrl + ``;
+    return this.httpClient.get<Product[]>(url);
+  }
+
 }
 
 interface MessageResponse{  

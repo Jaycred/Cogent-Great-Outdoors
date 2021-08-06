@@ -17,8 +17,10 @@ import { CategoryViewComponent } from './components/category-view/category-view.
 
 
 const route: Routes = [
+  {path: 'categories/:categoryName', component: ProductViewComponent},
   {path: 'categories', component: CategoryViewComponent},
-  {path: 'products/all', component: ProductViewComponent},
+  {path: 'products/:id', component: ProductViewComponent},
+  {path: 'products', component: ProductViewComponent},
   {path: 'signup', component: UserAddComponentComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
