@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cogent.go.entities.Cart;
@@ -71,11 +72,11 @@ public class GoController {
 		return service.getProductList();
 	}
 	@GetMapping("/findProductsByCategory")
-	public List<Product> getProductList(@RequestParam ){
+	public List<Product> getProductList(@RequestParam("category") String category){
 		return service.getProductList();
 	}
 	@GetMapping("/findProductsById")
-	public List<Product> getProductList(){
+	public List<Product> getProductList(@RequestParam("id") int id){
 		return service.getProductList();
 	}
 	
