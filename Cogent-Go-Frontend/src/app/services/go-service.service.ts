@@ -21,7 +21,7 @@ export class GoServiceService {
   constructor(private httpClient: HttpClient) { }
 
   addProduct(p:any): Observable<string> {
-    const url = this.baseUrl+"addProducts";
+    const url = this.baseUrl+"addProduct";
     return this.httpClient.post<MessageResponse>(url,p,this.httpOptions).pipe(map(response => response.result));
   }
 
