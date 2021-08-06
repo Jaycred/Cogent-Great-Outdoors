@@ -15,6 +15,7 @@ import { OrderAddComponentComponent } from './components/order-add-component/ord
 import { ProductViewComponent } from './components/product-view/product-view.component';
 import { CategoryViewComponent } from './components/category-view/category-view.component';
 import { ProductSpecsComponent } from './components/product-specs/product-specs.component';
+import { CartViewComponent } from './components/cart-view/cart-view.component';
 
 
 const route: Routes = [
@@ -37,7 +38,8 @@ const route: Routes = [
     OrderAddComponentComponent,
     ProductViewComponent,
     CategoryViewComponent,
-    ProductSpecsComponent
+    ProductSpecsComponent,
+    CartViewComponent
 
   ],
   imports: [
