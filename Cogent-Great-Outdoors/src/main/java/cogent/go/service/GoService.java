@@ -59,7 +59,7 @@ public class GoService {
 		return productRep.findById(id);
 	}
 	public List<Product> getProductByCategory(String category){
-		return productRep.findAll();
+		return productRep.findByCategory(category);
 	}
 	
 }
