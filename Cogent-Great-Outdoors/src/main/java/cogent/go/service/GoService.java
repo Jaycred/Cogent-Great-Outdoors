@@ -2,6 +2,7 @@ package cogent.go.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,15 @@ public class GoService {
 	public List<Product> getProductByCategory(String category){
 		return productRep.findByCategory(category);
 	}
-	
+	public List<Cart> getCartList() {
+		return cartRep.findAll();
+	}
+	public Optional<Cart> getCartById(int id){
+		return cartRep.findById(id);
+	}
+	public List<Cart> getCartByUserId(int id){
+		User user = userRep.getById(id);
+		return cartRep.findByUser(user);
+	}
 	
 }

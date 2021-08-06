@@ -1,0 +1,19 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-3" *ngFor="let tempCart of cartList">
+            <div class="product-box">
+              <a routerLink="/carts/{{tempCart.product.productId}}">
+                <h1>{{ tempCart.product.productId }}</h1>
+              </a>
+              <h2>Quantity: {{ tempCart.quantity }}</h2>
+              <div class="price">{{ tempCart.product.price | currency:'USD' }} each</div>
+              <div class="price">{{ tempCart.price | currency:'USD' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
