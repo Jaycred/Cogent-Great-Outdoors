@@ -20,7 +20,8 @@ export class ProductViewComponent implements OnInit {
     this.route.paramMap.subscribe(()=>{
       this.id = +this.route.snapshot.paramMap.get("id");
       this.categoryName = this.route.snapshot.paramMap.get("categoryName");
-      if(this.categoryName.length != 0) this.findByCategory(this.categoryName);
+      console.log(this.id + " " + this.categoryName)
+      if(this.categoryName) this.findByCategory(this.categoryName);
       //viewProducts or findByName based on keyword value
       else if(this.id != 0) this.findById(this.id);
       else this.viewProducts();
