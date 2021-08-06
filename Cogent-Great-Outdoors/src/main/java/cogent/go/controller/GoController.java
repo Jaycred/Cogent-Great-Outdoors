@@ -93,6 +93,10 @@ public class GoController {
 	public List<Product> getProductsById(@RequestParam("id") int id){
 		return service.getProductById(id);
 	}
+	@PostMapping("/login")
+    public User login(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return service.login(email, password);
+    }
 	
 	
 	// please work

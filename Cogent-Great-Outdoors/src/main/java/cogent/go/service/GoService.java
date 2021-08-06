@@ -76,4 +76,10 @@ public class GoService {
 		return cartRep.findByUser(user);
 	}
 	
+	public User login(String email, String password) {
+		User user = userRep.findUserByEmail(email);
+		if(user != null && user.getPassword().equals(password)) return user;
+		return new User();
+	}
+	
 }

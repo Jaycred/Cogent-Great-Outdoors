@@ -14,4 +14,6 @@ import cogent.go.entities.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Page<User> findByFirstNameContaining(@RequestParam("firstName") String name, Pageable pageable);
+	
+	User findUserByEmail(@RequestParam("email") String email);
 }
