@@ -25,6 +25,7 @@ const route: Routes = [
   {path: 'products/:id', component: ProductSpecsComponent},
   {path: 'products', component: ProductViewComponent},
   {path: 'signup', component: UserAddComponentComponent},
+  {path: 'addProduct', component: ProductAddComponentComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
