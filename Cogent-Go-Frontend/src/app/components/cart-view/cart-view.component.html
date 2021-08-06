@@ -3,13 +3,13 @@
       <div class="container-fluid">
         <div class="row">
 
-          <div class="col-md-3" *ngFor="let tempProduct of productList">
+          <div class="col-md-3" *ngFor="let item of cartList">
             <div class="product-box">
-              <a routerLink="/products/{{tempProduct.productId}}">
+              <a routerLink="/products/{{item.product.productId}}">
                 <img src='assets/placeholder.png' class="img-responsive">
               </a>
-              <a routerLink="/products/{{tempProduct.productId}}">
-                <h1>{{ tempProduct.productName }}</h1>
+              <a routerLink="/products/{{item.product.productId}}">
+                <h1>{{ item.product.productName }}</h1>
               </a>
             </div>
           </div>
