@@ -55,5 +55,11 @@ public class GoService {
 	public List<Product> getProductList(){
 		return productRep.findAll();
 	}
+	public List<Product> getProductById(int id){
+		return productRep.findById(id);
+	}
+	public List<Product> getProductByCategory(String category){
+		return productRep.findAll();
+	}
 	
 }

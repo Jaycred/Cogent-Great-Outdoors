@@ -1,5 +1,7 @@
 package cogent.go.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +14,9 @@ import cogent.go.entities.Product;
 @CrossOrigin()
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-	Page<Product> findByCategory(@RequestParam("productId") String id, Pageable pageable);
+	List<Product> findByCategory(@RequestParam("categoryName") String cName);
+	
+	List<Product> findById(@RequestParam("productId") int id);
 
-	Page<Product> findByProductNameContaining(@RequestParam("productName") String productName, Pageable pageable);
+	List<Product> findByProductNameContaining(@RequestParam("productName") String productName);
 }

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/common/product';
-import { GoServiceService } from 'src/app/services/go-service.service';
 
 @Component({
   selector: 'app-product-view',
@@ -12,19 +10,12 @@ export class CategoryViewComponent implements OnInit {
   categoryList: string[] = [
     "Mountaineering Equipment",
     "Camping Equipment",
-    "Sports Equipment"
+    "Sports Equipment",
+    "Sundries"
   ];
 
-  constructor(private gs: GoServiceService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    //this.viewProducts();
-  }
-  
-  viewProducts()
-  {
-    this.gs.getProducts().subscribe(data=>{
-      //this.productList = data;
-    })
   }
 }
