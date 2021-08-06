@@ -12,7 +12,6 @@ import { UserAddComponentComponent } from './components/user-add-component/user-
 import { CartAddComponentComponent } from './components/cart-add-component/cart-add-component.component';
 import { QueryAddComponentComponent } from './components/query-add-component/query-add-component.component';
 import { OrderAddComponentComponent } from './components/order-add-component/order-add-component.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductViewComponent } from './components/product-view/product-view.component';
 import { CategoryViewComponent } from './components/category-view/category-view.component';
 

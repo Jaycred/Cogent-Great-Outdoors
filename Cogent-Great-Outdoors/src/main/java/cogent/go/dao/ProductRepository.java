@@ -12,7 +12,7 @@ import cogent.go.entities.Product;
 @CrossOrigin()
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-	Page<Product> findByCategory(@RequestParam("productId") String id, Pageable pageable);
+	Page<Product> findByCategory(@RequestParam("category") String category, Pageable pageable);
 
 	Page<Product> findByProductNameContaining(@RequestParam("productName") String productName, Pageable pageable);
 }
