@@ -58,12 +58,20 @@ export class GoServiceService {
 
   getProductsById(id: number): Observable<Product[]>
   {
+<<<<<<< HEAD
     const url = '${this.baseUrl}/findProductsById?id=${id}';
+=======
+    const url = this.baseUrl + "findProductsById?id=" + id;
+>>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
     return this.httpClient.get<Product[]>(url);
   }
   getProductsByCategory(cName: string): Observable<Product[]>
   {
+<<<<<<< HEAD
     const url = '${this.baseUrl}/findProductsByCategory?category=${cName}';
+=======
+    const url = this.baseUrl + "findProductsByCategory?category=" + cName;
+>>>>>>> branch 'main' of https://github.com/Jaycred/Cogent-Great-Outdoors.git
     return this.httpClient.get<Product[]>(url);
   }
 }
