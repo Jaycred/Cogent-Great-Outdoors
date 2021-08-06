@@ -14,6 +14,7 @@ import cogent.go.entities.Product;
 @CrossOrigin()
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+
 	List<Product> findByCategory(@RequestParam("categoryName") String cName);
 	
 	List<Product> findById(@RequestParam("productId") int id);
