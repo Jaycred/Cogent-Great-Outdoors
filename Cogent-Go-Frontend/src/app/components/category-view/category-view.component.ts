@@ -8,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class CategoryViewComponent implements OnInit {
 
   categoryList: string[] = [
-    "Mountaineering Equipment",
-    "Camping Equipment",
-    "Sports Equipment",
-    "Sundries"
+    "MountaineeringEquipment",
+    "CampingEquipment",
+    "GolfEquipment",
+    "OutdoorProtection",
+    "PersonalAccessories"
   ];
 
   constructor() { }
