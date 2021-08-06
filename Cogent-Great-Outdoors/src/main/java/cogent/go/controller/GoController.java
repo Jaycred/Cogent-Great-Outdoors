@@ -72,11 +72,12 @@ public class GoController {
 		return service.getProductList();
 	}
 	@GetMapping("/findProductsByCategory")
-	public List<Product> getProductList(@RequestParam("category") String category){
+	public List<Product> getProductsByCategory(@RequestParam("category") String category){
 		return service.getProductByCategory(category);
 	}
 	@GetMapping("/findProductsById")
-	public List<Product> getProductList(@RequestParam("id") int id){
+	public List<Product> getProductsById(@RequestParam("id") int id){
+
 		return service.getProductById(id);
 	}
 	

@@ -1,5 +1,6 @@
 package cogent.go.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,9 @@ public class GoService {
 		return productRep.findAll();
 	}
 	public List<Product> getProductById(int id){
-		return productRep.findById(id);
+		List<Product> product = new ArrayList<>();
+		product.add(productRep.findById(id).get());
+		return product;
 	}
 	public List<Product> getProductByCategory(String category){
 		return productRep.findByCategory(category);
