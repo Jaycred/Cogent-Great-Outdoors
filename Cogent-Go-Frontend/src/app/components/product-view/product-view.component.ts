@@ -11,19 +11,14 @@ import { GoServiceService } from 'src/app/services/go-service.service';
 export class ProductViewComponent implements OnInit {
 
   categoryName: string;
-  id: number;
   productList: Product[];
 
   constructor(private gs: GoServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(()=>{
-      this.id = +this.route.snapshot.paramMap.get("id");
       this.categoryName = this.route.snapshot.paramMap.get("categoryName");
-      console.log(this.id + " " + this.categoryName)
       if(this.categoryName) this.findByCategory(this.categoryName);
-      //viewProducts or findByName based on keyword value
-      else if(this.id != 0) this.findById(this.id);
       else this.viewProducts();
     })
   }
@@ -38,13 +33,6 @@ export class ProductViewComponent implements OnInit {
   findByCategory(cName: string)
   {
     this.gs.getProductsByCategory(cName).subscribe(data=>{
-      this.productList = data;
-    })
-  }
-
-  findById(id: number)
-  {
-    this.gs.getProductsById(id).subscribe(data=>{
       this.productList = data;
     })
   }

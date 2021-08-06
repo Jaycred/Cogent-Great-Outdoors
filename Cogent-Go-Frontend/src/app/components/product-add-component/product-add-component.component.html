@@ -1,1 +1,15 @@
-<p>product-add-component works!</p>
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <form #productForm="ngForm" (ngSubmit)="processForm(productForm)">
+                <p>Product Name: <input type="text" id="productName" name="productName" ngModel></p> <br>
+                <p>Description: <input type="text" id="description"  name="description" ngModel></p> <br>
+                <p>Price: <input type="text" id="price"  name="price" ngModel> </p> <br>
+                <p>Category: <input type="text" id="category" name="category" ngModel> </p> <br>
+                <p><input type="submit" value="submit" id="b1_submit" name="b1_submit"></p>
+            </form>
+         
+            <span id="message">{{this.message}}</span>
+        </div>
+    </div>
+</div>
