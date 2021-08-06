@@ -77,6 +77,7 @@ public class GoController {
 	}
 	@GetMapping("/findProductsById")
 	public List<Product> getProductsById(@RequestParam("id") int id){
+
 		return service.getProductById(id);
 	}
 	
