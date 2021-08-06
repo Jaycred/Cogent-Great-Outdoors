@@ -10,8 +10,9 @@ export class CategoryViewComponent implements OnInit {
   categoryList: string[] = [
     "MountaineeringEquipment",
     "CampingEquipment",
-    "SportsEquipment",
-    "Sundries"
+    "GolfEquipment",
+    "OutdoorProtection",
+    "PersonalAccessories"
   ];
 
   constructor() { }
