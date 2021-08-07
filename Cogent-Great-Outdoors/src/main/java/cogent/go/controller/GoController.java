@@ -40,7 +40,7 @@ import cogent.go.security.model.MessageResponse;
 import cogent.go.security.model.UserDetailsImpl;
 import cogent.go.service.GoService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping("/go")
 public class GoController {

@@ -17,14 +17,14 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import cogent.go.security.service.UserDetailsServiceImpl;
+import cogent.go.service.GoService;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtTokenUtil jwtUtils;
 
 	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
+	private GoService userDetailsService;
 
 	private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 

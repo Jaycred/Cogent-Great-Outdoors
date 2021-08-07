@@ -60,12 +60,12 @@ export class GoServiceService {
 
   getProductsById(id: number): Observable<Product[]>
   {
-    const url = `${this.baseUrl}/findProductsById?id=${id}`;
+    const url = `${this.baseUrl}findProductsById?id=${id}`;
     return this.httpClient.get<Product[]>(url);
   }
   getProductsByCategory(cName: string): Observable<Product[]>
   {
-    const url = `${this.baseUrl}/findProductsByCategory?category=${cName}`;
+    const url = `${this.baseUrl}findProductsByCategory?category=${cName}`;
     return this.httpClient.get<Product[]>(url);
   }
 
@@ -75,17 +75,17 @@ export class GoServiceService {
   }
 
   getCartsById(id: number): Observable<Cart[]>{
-    const url = `${this.baseUrl}/findCartsById?id=${id}`;
+    const url = `${this.baseUrl}findCartsById?id=${id}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
   getCartsByUserId(userId: number): Observable<Cart[]>{
-    const url = `${this.baseUrl}/findCartsByUserId?id=${userId}`;
+    const url = `${this.baseUrl}findCartsByUserId?id=${userId}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
   login(email:string, password:string): Observable<User>{
-    const url = `${this.baseUrl}/login?email=${email}&password=${password}`;
+    const url = `${this.baseUrl}login?email=${email}&password=${password}`;
     return this.httpClient.get<User>(url);
   }
 }
