@@ -17,6 +17,7 @@ import { CategoryViewComponent } from './components/category-view/category-view.
 import { ProductSpecsComponent } from './components/product-specs/product-specs.component';
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { UserAccountComponent } from './components/user-account/user-account.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 
 
 const route: Routes = [
@@ -26,6 +27,10 @@ const route: Routes = [
   {path: 'products', component: ProductViewComponent},
   {path: 'signup', component: UserAddComponentComponent},
   {path: 'addProduct', component: ProductAddComponentComponent},
+  {path: 'addCart', component: CartAddComponentComponent},
+  {path: 'carts', component: CartViewComponent},
+  {path: 'carts/:cartId', component:CartViewComponent},
+  {path: 'carts/user/:userId', component:CartViewComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
@@ -42,7 +47,8 @@ const route: Routes = [
     CategoryViewComponent,
     ProductSpecsComponent,
     CartViewComponent,
-    UserAccountComponent
+    UserAccountComponent,
+    UserLoginComponent
 
   ],
   imports: [

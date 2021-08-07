@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../common/product';
 import { Cart } from '../common/cart';
+import { User } from '../common/user';
 
 @Injectable({
   providedIn: 'root'
@@ -68,10 +69,24 @@ export class GoServiceService {
     return this.httpClient.get<Product[]>(url);
   }
 
-  getCart(userId: number): Observable<Cart[]>
-  {
-    const url = `${this.baseUrl}/cart?userId=${userId}`;
-    return null; //this.httpClient.get<Product[]>(url);
+  getCarts(): Observable<Cart[]>{
+    const url = this.baseUrl + "findAllCarts";
+    return this.httpClient.get<Cart[]>(url);
+  }
+
+  getCartsById(id: number): Observable<Cart[]>{
+    const url = `${this.baseUrl}/findCartsById?id=${id}`;
+    return this.httpClient.get<Cart[]>(url);
+  }
+
+  getCartsByUserId(userId: number): Observable<Cart[]>{
+    const url = `${this.baseUrl}/findCartsByUserId?id=${userId}`;
+    return this.httpClient.get<Cart[]>(url);
+  }
+
+  login(email:string, password:string): Observable<User>{
+    const url = `${this.baseUrl}/login?email=${email}&password=${password}`;
+    return this.httpClient.get<User>(url);
   }
 }
 

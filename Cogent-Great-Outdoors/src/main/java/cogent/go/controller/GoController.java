@@ -1,6 +1,7 @@
 package cogent.go.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,6 +68,19 @@ public class GoController {
         return new ResponseEntity<>("Cart #" + cart.getCartId() + " was saved.", HttpStatus.OK);
     }
 	
+	@GetMapping("/findAllCarts")
+	public List<Cart> getCartList(){
+		return service.getCartList();
+	}
+	@GetMapping("/findCartsById")
+	public Optional<Cart> getCartById(@RequestParam("id") int id){
+		return service.getCartById(id);
+	}
+	@GetMapping("/findCartsByUserId")
+	public List<Cart> getCartByUserId(@RequestParam("id") int id){
+		return service.getCartByUserId(id);
+	}
+	
 	@GetMapping("/findAllProducts")
 	public List<Product> getProductList(){
 		return service.getProductList();
@@ -77,9 +91,12 @@ public class GoController {
 	}
 	@GetMapping("/findProductsById")
 	public List<Product> getProductsById(@RequestParam("id") int id){
-
 		return service.getProductById(id);
 	}
+	@PostMapping("/login")
+    public User login(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return service.login(email, password);
+    }
 	
 	
 	// please work
