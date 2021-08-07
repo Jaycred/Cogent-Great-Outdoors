@@ -13,7 +13,7 @@
               </a>
               <h2>{{ product.description }}</h2>
               <div class="price">{{ product.price | currency:'USD' }}</div>
-              <a href="#" class="primary-btn">Add to cart</a>
+              <a routerLink="/addToCart/{{product.productId}}" class="primary-btn">Add to cart</a>
             </div>
           </div>
         </div>
