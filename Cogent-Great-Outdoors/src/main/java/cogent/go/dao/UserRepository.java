@@ -1,5 +1,7 @@
 package cogent.go.dao;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +17,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Page<User> findByFirstNameContaining(@RequestParam("firstName") String name, Pageable pageable);
 	
-	User findUserByEmail(@RequestParam("email") String email);
+	Optional<User> findByEmail(@RequestParam("email") String email);
 }

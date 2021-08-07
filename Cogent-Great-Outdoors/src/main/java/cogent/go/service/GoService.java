@@ -5,8 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import cogent.go.security.service.*;
 import cogent.go.dao.CartRepository;
 import cogent.go.dao.CustomerQueryRepository;
 import cogent.go.dao.DeliveryAddressRepository;
@@ -21,7 +26,7 @@ import cogent.go.entities.Product;
 import cogent.go.entities.User;
 
 @Service
-public class GoService {
+public class GoService implements UserDetailsService{
 	
 	@Autowired
 	private ProductRepository productRep;
@@ -77,9 +82,19 @@ public class GoService {
 	}
 	
 	public User login(String email, String password) {
-		User user = userRep.findUserByEmail(email);
-		if(user != null && user.getPassword().equals(password)) return user;
-		return new User();
+		Optional<User> user = userRep.findByEmail(email);
+		User u1 = new User();
+		if(user.isPresent()) {
+			u1 = user.get();
+		}
+		return u1;
+	}
+	@Override
+	@Transactional
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User user = userRep.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with email: " + email));
+		return JwtUserDetailsImpl.build(user);
 	}
 	
 }
