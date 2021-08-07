@@ -14,36 +14,31 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import cogent.go.security.service.JwtUserDetailsImpl;
-import cogent.go.service.GoService;
+import cogent.go.security.service.UserDetailsServiceImpl;
 
-@Component
-public class JwtRequestFilter extends OncePerRequestFilter{
-
+public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtTokenUtil jwtUtils;
 
 	@Autowired
-	private GoService goService;
-	
-	private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
-	
+	private UserDetailsServiceImpl userDetailsService;
+
+	private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
 			String jwt = parseJwt(request);
 			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
 				String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-				UserDetails userDetails = goService.loadUserByUsername(username);
+				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						userDetails, null, userDetails.getAuthorities());
+						userDetails, null);
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
 				SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -54,7 +49,7 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 
 		filterChain.doFilter(request, response);
 	}
-	
+
 	private String parseJwt(HttpServletRequest request) {
 		String headerAuth = request.getHeader("Authorization");
 
