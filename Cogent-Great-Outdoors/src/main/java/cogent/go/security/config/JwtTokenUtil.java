@@ -20,10 +20,10 @@ import io.jsonwebtoken.UnsupportedJwtException;
 public class JwtTokenUtil {
 	private static final Logger logger = LoggerFactory.getLogger(JwtTokenUtil.class);
 
-	@Value("${cogent.demo.jwtSecret}")
+	@Value("${cogent.go.jwtSecret}")
 	private String jwtSecret;
 
-	@Value("${cogent.demo.jwtExpirationMs}")
+	@Value("${cogent.go.jwtExpirationMs}")
 	private int jwtExpirationMs;
 
 	public String generateJwtToken(Authentication authentication) {
