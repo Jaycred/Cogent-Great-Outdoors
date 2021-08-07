@@ -1,6 +1,5 @@
 package cogent.go.security.config;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import cogent.go.security.service.JwtUserDetailsImpl;
+import cogent.go.security.model.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -18,7 +17,7 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
-public class JwtTokenUtil implements Serializable{
+public class JwtTokenUtil {
 	private static final Logger logger = LoggerFactory.getLogger(JwtTokenUtil.class);
 
 	@Value("${cogent.demo.jwtSecret}")
@@ -26,18 +25,20 @@ public class JwtTokenUtil implements Serializable{
 
 	@Value("${cogent.demo.jwtExpirationMs}")
 	private int jwtExpirationMs;
-	
+
 	public String generateJwtToken(Authentication authentication) {
 
-		JwtUserDetailsImpl userPrincipal = (JwtUserDetailsImpl) authentication.getPrincipal();
+		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
 		return Jwts.builder().setSubject((userPrincipal.getUsername())).setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 	}
+
 	public String getUserNameFromJwtToken(String token) {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
+
 	public boolean validateJwtToken(String authToken) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
