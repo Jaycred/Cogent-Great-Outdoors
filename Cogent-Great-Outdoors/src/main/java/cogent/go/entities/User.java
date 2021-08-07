@@ -52,10 +52,9 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(int id, String firstName, String lastName, String phoneNumber, String email, String password,
+	public User(String firstName, String lastName, String phoneNumber, String email, String password,
 			String addressLine1, String addressLine2, String state, int pincode) {
 		super();
-		this.userId = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
