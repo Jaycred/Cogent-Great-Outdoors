@@ -28,9 +28,10 @@ const route: Routes = [
   {path: 'signup', component: UserAddComponentComponent},
   {path: 'addProduct', component: ProductAddComponentComponent},
   {path: 'addCart', component: CartAddComponentComponent},
-  {path: 'carts', component: CartViewComponent},
-  {path: 'carts/:cartId', component:CartViewComponent},
-  {path: 'carts/user/:userId', component:CartViewComponent},
+  {path: 'login', component: UserLoginComponent},
+  {path: 'cart', component: CartViewComponent},
+  {path: 'cart/:cartId', component:CartViewComponent},
+  {path: 'cart/user/:userId', component:CartViewComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 

@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -29,8 +33,12 @@ public class User {
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	@Size(max = 30)
+	@Email
+	@NotBlank
 	private String email;
 	@Size(max = 30)
+	@NotBlank
+	@JsonIgnore
 	private String password;
 	@Size(max = 60)
 	@Column(name = "address_line_1")

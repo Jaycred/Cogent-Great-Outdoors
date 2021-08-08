@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../common/product';
 import { Cart } from '../common/cart';
-import { User } from '../common/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +12,14 @@ import { User } from '../common/user';
 export class GoServiceService {
 
   private baseUrl = 'http://localhost:5000/go/';
+  private token = "";
+  private currentUserId = 0;
+  private loginArray: Array<any>;
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
+      'Authorization': 'Bearer ' + this.token
     })
   };
 
@@ -38,7 +41,7 @@ export class GoServiceService {
   }
 
   addUser(user:any): Observable<string> {
-    const url = this.baseUrl+"addUser";
+    const url = this.baseUrl+"signup";
     return this.httpClient.post<MessageResponse>(url,user,this.httpOptions).pipe(map(response => response.result));
   }
 
@@ -84,12 +87,19 @@ export class GoServiceService {
     return this.httpClient.get<Cart[]>(url);
   }
 
-  login(email:string, password:string): Observable<User>{
-    const url = `${this.baseUrl}login?email=${email}&password=${password}`;
-    return this.httpClient.get<User>(url);
+  login(user: any): void{
+    const url = this.baseUrl + "login";
+    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => [response.accessToken, response.id])).subscribe(data=>{this.loginArray = data});
+    this.token = this.loginArray[0];
+    this.currentUserId = this.loginArray[1];
   }
+
 }
 
 interface MessageResponse{  
   "result": string;
+}
+interface TokenResponse{
+  "id": number;  
+  "accessToken": string;
 }

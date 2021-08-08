@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +26,7 @@ public class JwtUserDetailsImpl implements UserDetails{
 	
 	private String phoneNumber;
 
+	@NotBlank
 	private String email;
 
 	@JsonIgnore
@@ -132,5 +135,15 @@ public class JwtUserDetailsImpl implements UserDetails{
 	public int getPincode() {
 		return pincode;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	
 }
