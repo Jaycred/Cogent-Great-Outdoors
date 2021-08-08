@@ -19,10 +19,6 @@ export class GoServiceService {
   private currentUserId = 0;
   private loginArray: Array<any>;
 
-  private token:string = '';
-
-  private currentUserId = 0;
-
 
   httpOptions = {
     headers: new HttpHeaders({
