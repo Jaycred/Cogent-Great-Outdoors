@@ -80,6 +80,12 @@ public class GoService implements UserDetailsService{
 		User user = userRep.getById(id);
 		return cartRep.findByUser(user);
 	}
+	public User getUserById(int id) {
+		return userRep.getById(id);
+	}
+	public List<User> getAllUsers(){
+		return userRep.findAll();
+	}
 	
 	public User login(String email, String password) {
 		Optional<User> user = userRep.findByEmail(email);
