@@ -15,4 +15,5 @@ import cogent.go.entities.User;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 	public List<Cart> findByUser(User user);
+	public List<Cart> findAll();
 }

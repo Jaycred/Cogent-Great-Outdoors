@@ -16,8 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import cogent.go.security.config.JwtRequestFilter;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

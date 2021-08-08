@@ -1,1 +1,11 @@
-<p>user-login works!</p>
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <form #userForm="ngForm" (ngSubmit)="processForm(userForm)">
+                <p>Email: <input type="text" id="email" name="email" ngModel> </p> <br>
+                <p>Password: <input type="text" id="password" name="password" ngModel> </p> <br>
+                <p><input type="submit" value="submit" id="b1_submit" name="b1_submit"></p>
+            </form>
+        </div>
+    </div>
+</div>

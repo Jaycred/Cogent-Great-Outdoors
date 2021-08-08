@@ -8,12 +8,16 @@ import { Cart } from '../common/cart';
 import { User } from '../common/user';
 import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class GoServiceService {
 
   private baseUrl = 'http://localhost:5000/go/';
+  private token = "";
+  private currentUserId = 0;
+  private loginArray: Array<any>;
 
   private token:string = '';
 
@@ -67,12 +71,12 @@ export class GoServiceService {
 
   getProductsById(id: number): Observable<Product[]>
   {
-    const url = `${this.baseUrl}/findProductsById?id=${id}`;
+    const url = `${this.baseUrl}findProductsById?id=${id}`;
     return this.httpClient.get<Product[]>(url);
   }
   getProductsByCategory(cName: string): Observable<Product[]>
   {
-    const url = `${this.baseUrl}/findProductsByCategory?category=${cName}`;
+    const url = `${this.baseUrl}findProductsByCategory?category=${cName}`;
     return this.httpClient.get<Product[]>(url);
   }
 
@@ -82,19 +86,22 @@ export class GoServiceService {
   }
 
   getCartsById(id: number): Observable<Cart[]>{
-    const url = `${this.baseUrl}/findCartsById?id=${id}`;
+    const url = `${this.baseUrl}findCartsById?id=${id}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
   getCartsByUserId(userId: number): Observable<Cart[]>{
-    const url = `${this.baseUrl}/findCartsByUserId?id=${userId}`;
+    const url = `${this.baseUrl}findCartsByUserId?id=${userId}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
-  login(user:any): void {
-    const url = this.baseUrl+"login";
-    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => response.accessToken)).subscribe(data =>{this.token=data});
+  login(user: any): void{
+    const url = this.baseUrl + "login";
+    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => [response.accessToken, response.id])).subscribe(data=>{this.loginArray = data});
+    this.token = this.loginArray[0];
+    this.currentUserId = this.loginArray[1];
   }
+
 }
 
 interface MessageResponse{  
@@ -102,6 +109,6 @@ interface MessageResponse{
 }
 
 interface TokenResponse{
-  "id": number;
+  "id": number;  
   "accessToken": string;
 }

@@ -26,6 +26,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired
 	private GoService goService;
 
+
 	private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 
 	@Override

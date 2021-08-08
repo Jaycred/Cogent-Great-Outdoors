@@ -40,7 +40,7 @@ import cogent.go.security.model.MessageResponse;
 import cogent.go.security.service.JwtUserDetailsImpl;
 import cogent.go.service.GoService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping("/go")
 public class GoController {
@@ -101,6 +101,16 @@ public class GoController {
         service.saveCart(cart);
         return new ResponseEntity<>("Cart #" + cart.getCartId() + " was saved.", HttpStatus.OK);
     }
+	/*
+	@GetMapping("/findAllCarts")
+	public List<Product> getCartList(){
+		return service.getProductList();
+	}
+	@GetMapping("/getCartsByUser")
+	public List<Product> getCartList(){
+		return service.getProductList();
+	}
+	*/
 	
 	@GetMapping("/findAllProducts")
 	public List<Product> getProductList(){
