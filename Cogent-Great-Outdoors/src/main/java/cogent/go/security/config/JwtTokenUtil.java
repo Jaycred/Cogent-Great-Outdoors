@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import cogent.go.security.model.UserDetailsImpl;
+import cogent.go.security.service.JwtUserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -20,15 +20,15 @@ import io.jsonwebtoken.UnsupportedJwtException;
 public class JwtTokenUtil {
 	private static final Logger logger = LoggerFactory.getLogger(JwtTokenUtil.class);
 
-	@Value("${cogent.demo.jwtSecret}")
+	@Value("${cogent.go.jwtSecret}")
 	private String jwtSecret;
 
-	@Value("${cogent.demo.jwtExpirationMs}")
+	@Value("${cogent.go.jwtExpirationMs}")
 	private int jwtExpirationMs;
 
 	public String generateJwtToken(Authentication authentication) {
 
-		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+		JwtUserDetailsImpl userPrincipal = (JwtUserDetailsImpl) authentication.getPrincipal();
 
 		return Jwts.builder().setSubject((userPrincipal.getUsername())).setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))

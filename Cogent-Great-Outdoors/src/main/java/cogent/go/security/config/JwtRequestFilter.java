@@ -17,14 +17,15 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import cogent.go.security.service.UserDetailsServiceImpl;
+import cogent.go.service.GoService;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtTokenUtil jwtUtils;
 
 	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
+	private GoService goService;
+
 
 	private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 
@@ -36,7 +37,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
 				String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+				UserDetails userDetails = goService.loadUserByUsername(username);
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, null);
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

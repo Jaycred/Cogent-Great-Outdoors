@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { Product } from '../common/product';
 import { Cart } from '../common/cart';
 import { User } from '../common/user';
+import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,19 @@ import { User } from '../common/user';
 export class GoServiceService {
 
   private baseUrl = 'http://localhost:5000/go/';
+  private token = "";
+  private currentUserId = 0;
+  private loginArray: Array<any>;
+
+  private token:string = '';
+
+  private currentUserId = 0;
+
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
+      'Authorization': 'Bearer ' + this.token
     })
   };
 
@@ -38,7 +49,7 @@ export class GoServiceService {
   }
 
   addUser(user:any): Observable<string> {
-    const url = this.baseUrl+"addUser";
+    const url = this.baseUrl+"signup";
     return this.httpClient.post<MessageResponse>(url,user,this.httpOptions).pipe(map(response => response.result));
   }
 
@@ -47,10 +58,10 @@ export class GoServiceService {
     return this.httpClient.post<MessageResponse>(url,query,this.httpOptions).pipe(map(response => response.result));
   }
 
-  addCart(cart:any): Observable<string> {
-    const url = this.baseUrl+"saveCart";
-    return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions).pipe(map(response => response.result));
-  }
+  // addCart(productId: number, price: number, userId: number): Observable<string> {
+  //   const url = this.baseUrl+"saveCart";
+  //   return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions);
+  // }
 
   getProducts(): Observable<Product[]>
   {
@@ -60,12 +71,12 @@ export class GoServiceService {
 
   getProductsById(id: number): Observable<Product[]>
   {
-    const url = `${this.baseUrl}/findProductsById?id=${id}`;
+    const url = `${this.baseUrl}findProductsById?id=${id}`;
     return this.httpClient.get<Product[]>(url);
   }
   getProductsByCategory(cName: string): Observable<Product[]>
   {
-    const url = `${this.baseUrl}/findProductsByCategory?category=${cName}`;
+    const url = `${this.baseUrl}findProductsByCategory?category=${cName}`;
     return this.httpClient.get<Product[]>(url);
   }
 
@@ -75,21 +86,29 @@ export class GoServiceService {
   }
 
   getCartsById(id: number): Observable<Cart[]>{
-    const url = `${this.baseUrl}/findCartsById?id=${id}`;
+    const url = `${this.baseUrl}findCartsById?id=${id}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
   getCartsByUserId(userId: number): Observable<Cart[]>{
-    const url = `${this.baseUrl}/findCartsByUserId?id=${userId}`;
+    const url = `${this.baseUrl}findCartsByUserId?id=${userId}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
-  login(email:string, password:string): Observable<User>{
-    const url = `${this.baseUrl}/login?email=${email}&password=${password}`;
-    return this.httpClient.get<User>(url);
+  login(user: any): void{
+    const url = this.baseUrl + "login";
+    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => [response.accessToken, response.id])).subscribe(data=>{this.loginArray = data});
+    this.token = this.loginArray[0];
+    this.currentUserId = this.loginArray[1];
   }
+
 }
 
 interface MessageResponse{  
   "result": string;
+}
+
+interface TokenResponse{
+  "id": number;  
+  "accessToken": string;
 }

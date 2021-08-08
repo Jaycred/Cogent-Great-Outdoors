@@ -37,10 +37,10 @@ import cogent.go.security.config.JwtTokenUtil;
 import cogent.go.security.model.JwtRequest;
 import cogent.go.security.model.JwtResponse;
 import cogent.go.security.model.MessageResponse;
-import cogent.go.security.model.UserDetailsImpl;
+import cogent.go.security.service.JwtUserDetailsImpl;
 import cogent.go.service.GoService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping("/go")
 public class GoController {
@@ -93,10 +93,24 @@ public class GoController {
     }
 	
 	@PostMapping("/saveCart")
-    public ResponseEntity<String> addCart(@RequestBody Cart cart) {
+    public ResponseEntity<String> addCart(@RequestParam("productId") int productId,
+    		@RequestParam("price") int price, @RequestParam("userId") int userId) {
+		Product product = service.getProductById(productId).get(0);
+		User user = service.getUserById(userId);
+		Cart cart = new Cart(user, product, 1, price);
         service.saveCart(cart);
         return new ResponseEntity<>("Cart #" + cart.getCartId() + " was saved.", HttpStatus.OK);
     }
+	/*
+	@GetMapping("/findAllCarts")
+	public List<Product> getCartList(){
+		return service.getProductList();
+	}
+	@GetMapping("/getCartsByUser")
+	public List<Product> getCartList(){
+		return service.getProductList();
+	}
+	*/
 	
 	@GetMapping("/findAllProducts")
 	public List<Product> getProductList(){
@@ -122,7 +136,7 @@ public class GoController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
-		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		JwtUserDetailsImpl userDetails = (JwtUserDetailsImpl) authentication.getPrincipal();
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(),
