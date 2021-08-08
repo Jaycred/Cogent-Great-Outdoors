@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../common/product';
 import { Cart } from '../common/cart';
+import { User } from '../common/user';
+import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +18,11 @@ export class GoServiceService {
   private token = "";
   private currentUserId = 0;
   private loginArray: Array<any>;
+
+  private token:string = '';
+
+  private currentUserId = 0;
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -50,10 +58,10 @@ export class GoServiceService {
     return this.httpClient.post<MessageResponse>(url,query,this.httpOptions).pipe(map(response => response.result));
   }
 
-  addCart(cart:any): Observable<string> {
-    const url = this.baseUrl+"saveCart";
-    return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions).pipe(map(response => response.result));
-  }
+  // addCart(productId: number, price: number, userId: number): Observable<string> {
+  //   const url = this.baseUrl+"saveCart";
+  //   return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions);
+  // }
 
   getProducts(): Observable<Product[]>
   {
@@ -99,6 +107,7 @@ export class GoServiceService {
 interface MessageResponse{  
   "result": string;
 }
+
 interface TokenResponse{
   "id": number;  
   "accessToken": string;

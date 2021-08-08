@@ -29,9 +29,18 @@ public class JwtUserDetailsImpl implements UserDetails{
 	@NotBlank
 	private String email;
 
+	@NotBlank
 	@JsonIgnore
 	private String password;
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	private String addressLine1;
 	
 	private String addressLine2;
@@ -77,25 +86,25 @@ public class JwtUserDetailsImpl implements UserDetails{
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

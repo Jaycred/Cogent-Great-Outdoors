@@ -16,4 +16,5 @@ export class UserLoginComponent implements OnInit {
   processForm(userForm: any){
     this.gs.login(JSON.stringify(userForm.value));
   }
+
 }

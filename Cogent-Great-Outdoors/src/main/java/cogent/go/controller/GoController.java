@@ -93,7 +93,11 @@ public class GoController {
     }
 	
 	@PostMapping("/saveCart")
-    public ResponseEntity<String> addCart(@RequestBody Cart cart) {
+    public ResponseEntity<String> addCart(@RequestParam("productId") int productId,
+    		@RequestParam("price") int price, @RequestParam("userId") int userId) {
+		Product product = service.getProductById(productId).get(0);
+		User user = service.getUserById(userId);
+		Cart cart = new Cart(user, product, 1, price);
         service.saveCart(cart);
         return new ResponseEntity<>("Cart #" + cart.getCartId() + " was saved.", HttpStatus.OK);
     }
