@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoServiceService } from 'src/app/services/go-service.service';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,13 +7,11 @@ import { GoServiceService } from 'src/app/services/go-service.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
   currentUser: any;
 
-  constructor(private gs: GoServiceService) { }
+  constructor(private token: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.gs.getUser();
+    this.currentUser = this.token.getUser();
   }
-
 }
