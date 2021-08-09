@@ -3,14 +3,14 @@
       <div class="container-fluid">
         <div class="row">
 
-          <div class="col-md-3" *ngFor="let item of cartList">
+          <div class="col-md-3" *ngFor="let tempCart of cartList">
             <div class="product-box">
-              <a routerLink="/products/{{item.product.productId}}">
-                <img src='assets/placeholder.png' class="img-responsive">
+              <a routerLink="/carts/{{tempCart.product.productId}}">
+                <h1>{{ tempCart.product.productId }}</h1>
               </a>
-              <a routerLink="/products/{{item.product.productId}}">
-                <h1>{{ item.product.productName }}</h1>
-              </a>
+              <h2>Quantity: {{ tempCart.quantity }}</h2>
+              <div class="price">{{ tempCart.product.price | currency:'USD' }} each</div>
+              <div class="price">{{ tempCart.price | currency:'USD' }}</div>
             </div>
           </div>
         </div>

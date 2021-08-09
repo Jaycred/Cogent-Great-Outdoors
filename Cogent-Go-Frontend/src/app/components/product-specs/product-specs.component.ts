@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Cart } from 'src/app/common/cart';
 import { Product } from 'src/app/common/product';
+import { User } from 'src/app/common/user';
 import { GoServiceService } from 'src/app/services/go-service.service';
 
 @Component({
@@ -12,6 +14,7 @@ export class ProductSpecsComponent implements OnInit {
 
   id: number;
   product: Product;
+  message:string;
   constructor(private gs: GoServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -27,4 +30,9 @@ export class ProductSpecsComponent implements OnInit {
       this.product = data[0];
     });
   }
+
+  addToCart(){
+    
+  }
+
 }

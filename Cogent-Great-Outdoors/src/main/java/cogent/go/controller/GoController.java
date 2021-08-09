@@ -1,11 +1,26 @@
 package cogent.go.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +28,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cogent.go.dao.UserRepository;
 import cogent.go.entities.Cart;
 import cogent.go.entities.CustomerQuery;
 import cogent.go.entities.DeliveryAddress;
 import cogent.go.entities.Order;
 import cogent.go.entities.Product;
 import cogent.go.entities.User;
+import cogent.go.security.config.JwtTokenUtil;
+import cogent.go.security.model.JwtResponse;
+import cogent.go.security.model.LoginRequest;
+import cogent.go.security.model.MessageResponse;
+import cogent.go.security.model.SignupRequest;
+import cogent.go.security.service.JwtUserDetailsImpl;
 import cogent.go.service.GoService;
 
 @CrossOrigin
@@ -28,6 +50,18 @@ public class GoController {
 	
 	@Autowired
     private GoService service;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	JwtTokenUtil jwtUtils;
+	
+	@Autowired
+	PasswordEncoder encoder;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	@PostMapping("/addProduct")
     public ResponseEntity<String> addProduct(@RequestBody Product product) {
@@ -62,10 +96,46 @@ public class GoController {
     }
 	
 	@PostMapping("/saveCart")
-    public ResponseEntity<String> addCart(@RequestBody Cart cart) {
+    public ResponseEntity<String> addCart(@RequestParam("productId") int productId,
+    		@RequestParam("price") int price, @RequestParam("userId") int userId) {
+		Product product = service.getProductById(productId).get(0);
+		User user = service.getUserById(userId);
+		Cart cart = new Cart(user, product, 1, price);
         service.saveCart(cart);
         return new ResponseEntity<>("Cart #" + cart.getCartId() + " was saved.", HttpStatus.OK);
     }
+	
+	@PostMapping("/changeCart")
+    public ResponseEntity<String> changeCart(@RequestParam("cartId") int cartId, @RequestParam("quantity")int quantity, @RequestParam("productId")int productId) {
+		Optional<Cart> cart = service.getCartById(cartId);
+		if(cart.isPresent()) {
+			Product product = service.getProductById(productId).get(0);
+			cart.get().setProduct(product);
+			cart.get().setQuantity(quantity);
+			cart.get().setPrice(quantity*product.getPrice());
+			return new ResponseEntity<>("Cart #" + cart.get().getCartId() + " changes were saved.", HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Cart #" + cart.get().getCartId() + " was not found!", HttpStatus.NOT_FOUND);
+    }
+	
+	@DeleteMapping("/deleteCart")
+	public ResponseEntity<String> deleteCart(@RequestParam("cartId") int cartId){
+		Cart cart = service.getCartById(cartId).get();
+		service.deleteCart(cart);
+		return new ResponseEntity<>("Cart #" + cartId + " was deleted.", HttpStatus.OK);
+	}
+	
+	
+	/*
+	@GetMapping("/findAllCarts")
+	public List<Product> getCartList(){
+		return service.getProductList();
+	}
+	@GetMapping("/getCartsByUser")
+	public List<Product> getCartList(){
+		return service.getProductList();
+	}
+	*/
 	
 	@GetMapping("/findAllProducts")
 	public List<Product> getProductList(){
@@ -82,5 +152,44 @@ public class GoController {
 	}
 	
 	
-	// please work
+	@PostMapping("/login")
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+		
+		JwtUserDetailsImpl userDetails = (JwtUserDetailsImpl) authentication.getPrincipal();
+
+		return ResponseEntity.ok(new JwtResponse(jwt, 
+												 userDetails.getId(),
+												 userDetails.getEmail()));
+	}
+
+	@PostMapping("/signup")
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		if (userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Username/email is already taken!"));
+		}
+
+		////////////////////////////FIX///////////////////////////////
+		// Create new user's account
+		User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getPhoneNumber(),
+							signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()),
+							signUpRequest.getAddressLine1(), signUpRequest.getAddressLine2(), signUpRequest.getState(),
+							signUpRequest.getPincode());
+
+		//////////////////////////////FIX/////////////////////////////////////////
+
+		service.saveUser(user);
+		// mail service to send plain text mail to user's email account about successful
+		// registration
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		
+		}
+	
 }

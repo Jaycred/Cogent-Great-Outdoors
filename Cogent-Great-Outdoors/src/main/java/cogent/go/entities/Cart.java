@@ -28,9 +28,8 @@ public class Cart {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Cart(int cartId, User user, Product product, int quantity, int price) {
+	public Cart(User user, Product product, int quantity, int price) {
 		super();
-		this.cartId = cartId;
 		this.user = user;
 		this.product = product;
 		this.quantity = quantity;

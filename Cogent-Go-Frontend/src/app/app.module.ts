@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { ProductAddComponentComponent } from './components/product-add-component/product-add-component.component';
 import { AddressAddComponentComponent } from './components/address-add-component/address-add-component.component';
 import { UserAddComponentComponent } from './components/user-add-component/user-add-component.component';
-import { CartAddComponentComponent } from './components/cart-add-component/cart-add-component.component';
 import { QueryAddComponentComponent } from './components/query-add-component/query-add-component.component';
 import { OrderAddComponentComponent } from './components/order-add-component/order-add-component.component';
 import { ProductViewComponent } from './components/product-view/product-view.component';
@@ -17,7 +16,11 @@ import { CategoryViewComponent } from './components/category-view/category-view.
 import { ProductSpecsComponent } from './components/product-specs/product-specs.component';
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { UserAccountComponent } from './components/user-account/user-account.component';
-
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { authInterceptorProviders } from './_helpers/auth-interceptor';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const route: Routes = [
   {path: 'categories/:categoryName', component: ProductViewComponent},
@@ -26,6 +29,10 @@ const route: Routes = [
   {path: 'products', component: ProductViewComponent},
   {path: 'signup', component: UserAddComponentComponent},
   {path: 'addProduct', component: ProductAddComponentComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'cart', component: CartViewComponent},
+  {path: 'cart/:cartId', component:CartViewComponent},
+  {path: 'cart/user/:userId', component:CartViewComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
@@ -35,14 +42,17 @@ const route: Routes = [
     ProductAddComponentComponent,
     AddressAddComponentComponent,
     UserAddComponentComponent,
-    CartAddComponentComponent,
     QueryAddComponentComponent,
     OrderAddComponentComponent,
     ProductViewComponent,
     CategoryViewComponent,
     ProductSpecsComponent,
     CartViewComponent,
-    UserAccountComponent
+    UserAccountComponent,
+    UserLoginComponent,
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent
 
   ],
   imports: [
@@ -53,7 +63,7 @@ const route: Routes = [
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
