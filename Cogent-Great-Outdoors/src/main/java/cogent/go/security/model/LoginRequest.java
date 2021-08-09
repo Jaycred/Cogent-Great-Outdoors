@@ -15,7 +15,7 @@ public class LoginRequest implements Serializable {
     
     @NotBlank
     private String password;
-    
+
     public String getEmail() {
         return email;
     }
@@ -32,4 +32,6 @@ public class LoginRequest implements Serializable {
         this.password = password;
     }
 
+
 }
+
