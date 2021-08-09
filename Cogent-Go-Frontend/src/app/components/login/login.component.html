@@ -3,7 +3,7 @@
         <form
         *ngIf="!isLoggedIn"
         name="form"
-        (ngSubmit)="f.form.valid $$ onSubmit()"
+        (ngSubmit)="f.form.valid && onSubmit()"
         #f = "ngForm"
         novalidate
         >
@@ -60,8 +60,10 @@
             </div>
           </div>
         </form>
+        <div>
         <div class="alert alert-success" *ngIf="isLoggedIn">
-            Logged in as {{ roles }}.
-          </div>
+            Logged in.
+        </div>
+      </div>
     </div>
 </div>
