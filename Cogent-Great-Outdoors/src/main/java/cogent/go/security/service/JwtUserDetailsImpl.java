@@ -144,7 +144,6 @@ public class JwtUserDetailsImpl implements UserDetails{
 	public int getPincode() {
 		return pincode;
 	}
-	
-	
+
 	
 }
