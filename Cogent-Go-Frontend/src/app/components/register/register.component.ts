@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoServiceService } from 'src/app/services/go-service.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -7,31 +7,32 @@ import { GoServiceService } from 'src/app/services/go-service.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   form: any = {
-    email: null,
-    password: null,
     firstName: null,
     lastName: null,
+    email: null,
+    password: null,
     phoneNumber: null,
     addressLine1: null,
     addressLine2: null,
     state: null,
-    pincode: 0
+    pincode: null
   };
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private gs: GoServiceService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    const {email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode } = this.form;
+    const {firstName, lastName, email, password, phoneNumber, addressLine1,
+            addressLine2, state, pincode} = this.form;
 
-    this.gs.register(email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode).subscribe(
+    this.authService.register(firstName, lastName, email, password, phoneNumber, addressLine1,
+      addressLine2, state, pincode).subscribe(
       data => {
         console.log(data);
         this.isSuccessful = true;
@@ -43,5 +44,4 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-
 }
