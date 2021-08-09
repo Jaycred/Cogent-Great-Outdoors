@@ -7,7 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class JwtRequest implements Serializable {
+public class SignupRequest implements Serializable {
 
 	private static final long serialVersionUID = 5926468583005150707L;
  
@@ -18,15 +18,27 @@ public class JwtRequest implements Serializable {
     @NotBlank
     private String password;
     
+    @NotBlank
 	private String firstName;
+    @NotBlank
 	private String lastName;
+    @NotBlank
 	private String phoneNumber;
+    @NotBlank
 	private String addressLine1;
+    @NotBlank
 	private String addressLine2;
+    @NotBlank
 	private String state;
+    @NotBlank
 	private int pincode;
 	
-	
+  //need default constructor for JSON Parsing
+	public SignupRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -98,11 +110,5 @@ public class JwtRequest implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-	
-	//need default constructor for JSON Parsing
-	public JwtRequest()
-	{
-		
-	}
 
 }

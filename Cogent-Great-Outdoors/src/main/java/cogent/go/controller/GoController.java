@@ -2,6 +2,7 @@ package cogent.go.controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,9 +36,10 @@ import cogent.go.entities.Order;
 import cogent.go.entities.Product;
 import cogent.go.entities.User;
 import cogent.go.security.config.JwtTokenUtil;
-import cogent.go.security.model.JwtRequest;
 import cogent.go.security.model.JwtResponse;
+import cogent.go.security.model.LoginRequest;
 import cogent.go.security.model.MessageResponse;
+import cogent.go.security.model.SignupRequest;
 import cogent.go.security.service.JwtUserDetailsImpl;
 import cogent.go.service.GoService;
 
@@ -101,6 +104,28 @@ public class GoController {
         service.saveCart(cart);
         return new ResponseEntity<>("Cart #" + cart.getCartId() + " was saved.", HttpStatus.OK);
     }
+	
+	@PostMapping("/changeCart")
+    public ResponseEntity<String> changeCart(@RequestParam("cartId") int cartId, @RequestParam("quantity")int quantity, @RequestParam("productId")int productId) {
+		Optional<Cart> cart = service.getCartById(cartId);
+		if(cart.isPresent()) {
+			Product product = service.getProductById(productId).get(0);
+			cart.get().setProduct(product);
+			cart.get().setQuantity(quantity);
+			cart.get().setPrice(quantity*product.getPrice());
+			return new ResponseEntity<>("Cart #" + cart.get().getCartId() + " changes were saved.", HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Cart #" + cart.get().getCartId() + " was not found!", HttpStatus.NOT_FOUND);
+    }
+	
+	@DeleteMapping("/deleteCart")
+	public ResponseEntity<String> deleteCart(@RequestParam("cartId") int cartId){
+		Cart cart = service.getCartById(cartId).get();
+		service.deleteCart(cart);
+		return new ResponseEntity<>("Cart #" + cartId + " was deleted.", HttpStatus.OK);
+	}
+	
+	
 	/*
 	@GetMapping("/findAllCarts")
 	public List<Product> getCartList(){
@@ -128,7 +153,7 @@ public class GoController {
 	
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest loginRequest) {
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
@@ -144,7 +169,7 @@ public class GoController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@Valid @RequestBody JwtRequest signUpRequest) {
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
 			return ResponseEntity
 					.badRequest()

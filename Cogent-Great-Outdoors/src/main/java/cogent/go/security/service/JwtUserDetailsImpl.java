@@ -145,14 +145,5 @@ public class JwtUserDetailsImpl implements UserDetails{
 		return pincode;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
 	
 }

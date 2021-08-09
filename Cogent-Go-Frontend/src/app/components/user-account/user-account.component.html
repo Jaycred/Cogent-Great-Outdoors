@@ -1,7 +1,5 @@
 
-<a routerLink="/signup">Signup</a>
-<a routerLink="/login">Login</a>
+<a routerLink="/signup" *ngIf="!isLoggedIn">Signup</a>
+<a routerLink="/login" *ngIf="!isLoggedIn">Login</a>
 
-<!--Change this later to display based on current user status (logged in vs. not logged in)
-<a routerLink="/account">Name</a>
--->
+<button (click)="signOut()" *ngIf="isLoggedIn">Log Out</button>
