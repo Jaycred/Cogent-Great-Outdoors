@@ -17,7 +17,10 @@ import { ProductSpecsComponent } from './components/product-specs/product-specs.
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { UserAccountComponent } from './components/user-account/user-account.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
-
+import { authInterceptorProviders } from './_helpers/auth-interceptor';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const route: Routes = [
   {path: 'categories/:categoryName', component: ProductViewComponent},
@@ -26,8 +29,7 @@ const route: Routes = [
   {path: 'products', component: ProductViewComponent},
   {path: 'signup', component: UserAddComponentComponent},
   {path: 'addProduct', component: ProductAddComponentComponent},
-  {path: 'addCart', component: CartAddComponentComponent},
-  {path: 'login', component: UserLoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'cart', component: CartViewComponent},
   {path: 'cart/:cartId', component:CartViewComponent},
   {path: 'cart/user/:userId', component:CartViewComponent},
@@ -47,7 +49,10 @@ const route: Routes = [
     ProductSpecsComponent,
     CartViewComponent,
     UserAccountComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent
 
   ],
   imports: [
@@ -58,7 +63,7 @@ const route: Routes = [
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

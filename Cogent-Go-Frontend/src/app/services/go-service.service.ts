@@ -17,11 +17,7 @@ export class GoServiceService {
   private baseUrl = 'http://localhost:5000/go/';
   private token = "";
   private currentUserId = 0;
-  private loginArray: Array<any>;
-
-  private token:string = '';
-
-  private currentUserId = 0;
+  private loginArray: Array<any> = [];
 
 
   httpOptions = {
@@ -97,9 +93,10 @@ export class GoServiceService {
 
   login(user: any): void{
     const url = this.baseUrl + "login";
-    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => [response.accessToken, response.id])).subscribe(data=>{this.loginArray = data});
-    this.token = this.loginArray[0];
-    this.currentUserId = this.loginArray[1];
+    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => response.accessToken)).subscribe(data=>this.token = data);
+    //this.token = this.loginArray[0];
+    //this.currentUserId = this.loginArray[1];
+    console.log(this.token);
   }
 
 }

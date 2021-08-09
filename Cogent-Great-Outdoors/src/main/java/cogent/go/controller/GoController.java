@@ -36,6 +36,7 @@ import cogent.go.entities.User;
 import cogent.go.security.config.JwtTokenUtil;
 import cogent.go.security.model.JwtRequest;
 import cogent.go.security.model.JwtResponse;
+import cogent.go.security.model.LoginRequest;
 import cogent.go.security.model.MessageResponse;
 import cogent.go.security.service.JwtUserDetailsImpl;
 import cogent.go.service.GoService;
@@ -128,7 +129,7 @@ public class GoController {
 	
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest loginRequest) {
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
