@@ -76,6 +76,9 @@ public class GoService implements UserDetailsService{
 	public Optional<Cart> getCartById(int id){
 		return cartRep.findById(id);
 	}
+	public void deleteCart(Cart cart) {
+		cartRep.delete(cart);
+	}
 	public List<Cart> getCartByUserId(int id){
 		User user = userRep.getById(id);
 		return cartRep.findByUser(user);

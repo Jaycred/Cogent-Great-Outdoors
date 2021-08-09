@@ -1,0 +1,182 @@
+<div class="col-md-12">
+    <div class="card card-container">
+        <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid $$ onSubmit()"
+        #f = "ngForm"
+        novalidate
+        >
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    [(ngModel)] = "form.email" required
+                    maxlength="30"
+                    #email="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="email.errors && f.submitted">
+                        <div *ngIf="email.errors.required">Email is required</div>
+                        <div *ngIf="email.errors.maxlength">
+                            Email must be at most 30 characters
+                        </div>
+                        <div *ngIf="email.errors.email">
+                            Email must be a valid email address
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      [(ngModel)]="form.password"
+                      required
+                      maxlength="60"
+                      #password="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="password.errors && f.submitted">
+                        <div *ngIf="password.errors.required">Password is required</div>
+                        <div *ngIf="password.errors.maxlength">
+                          Password must be at most 30 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="firstName"
+                      [(ngModel)]="form.firstName"
+                      required
+                      maxlength="30"
+                      #firstName="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="firstName.errors && f.submitted">
+                        <div *ngIf="firstName.errors.required">First Name is required</div>
+                        <div *ngIf="firstName.errors.maxlength">
+                          First Name must be at most 30 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="lastName"
+                      [(ngModel)]="form.lastName"
+                      required
+                      maxlength="30"
+                      #lastName="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="lastName.errors && f.submitted">
+                        <div *ngIf="lastName.errors.required">Last Name is required</div>
+                        <div *ngIf="lastName.errors.maxlength">
+                            Last Name must be at most 30 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phoneNumber"
+                      [(ngModel)]="form.phoneNumber"
+                      required
+                      maxlength="10"
+                      #phoneNumber="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="phoneNumber.errors && f.submitted">
+                        <div *ngIf="phoneNumber.errors.required">Phone Number is required</div>
+                        <div *ngIf="phoneNumber.errors.maxlength">
+                            Phone Number must be at most 10 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="addressLine1">Address Line 1</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="addressLine1"
+                      [(ngModel)]="form.addressLine1"
+                      required
+                      maxlength="60"
+                      #addressLine1="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="addressLine1.errors && f.submitted">
+                        <div *ngIf="addressLine1.errors.required">Address Line 1 is required</div>
+                        <div *ngIf="addressLine1.errors.maxlength">
+                            Address Line 1 must be at most 60 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="addressLine2">Address Line 2</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="addressLine2"
+                      [(ngModel)]="form.addressLine2"
+                      required
+                      maxlength="60"
+                      #addressLine2="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="addressLine2.errors && f.submitted">
+                        <div *ngIf="addressLine2.errors.required">Address Line 2 is required</div>
+                        <div *ngIf="addressLine2.errors.maxlength">
+                            Address Line 2 must be at most 60 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="state"
+                      [(ngModel)]="form.state"
+                      required
+                      maxlength="30"
+                      #state="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="state.errors && f.submitted">
+                        <div *ngIf="state.errors.required">State is required</div>
+                        <div *ngIf="state.errors.maxlength">
+                            State must be at most 30 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">pincode</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="pincode"
+                      [(ngModel)]="form.pincode"
+                      required
+                      #pincode="ngModel"
+                    />
+                    <div class="alert-danger" *ngIf="pincode.errors && f.submitted">
+                        <div *ngIf="pincode.errors.required">Pincode is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Sign Up</button>
+                </div>
+
+                <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                    Signup failed!<br />{{ errorMessage }}
+                </div>
+        </form>
+        <div class="alert alert-success" *ngIf="isSuccessful">
+            Your registration is successful!
+        </div>
+    </div>
+</div>

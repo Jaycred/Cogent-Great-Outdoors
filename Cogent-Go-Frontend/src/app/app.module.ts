@@ -17,6 +17,10 @@ import { ProductSpecsComponent } from './components/product-specs/product-specs.
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { UserAccountComponent } from './components/user-account/user-account.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
+import { SecurityServiceComponent } from './security-service/security-service.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const route: Routes = [
@@ -47,7 +51,11 @@ const route: Routes = [
     ProductSpecsComponent,
     CartViewComponent,
     UserAccountComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    SecurityServiceComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent
 
   ],
   imports: [
