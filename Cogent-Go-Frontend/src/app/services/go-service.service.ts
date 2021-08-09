@@ -8,6 +8,8 @@ import { Cart } from '../common/cart';
 import { User } from '../common/user';
 import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 
+const TOKEN_KEY = 'auth-token';
+const USER_KEY = 'auth-user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +17,13 @@ import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 export class GoServiceService {
 
   private baseUrl = 'http://localhost:5000/go/';
-  private token = "";
   private currentUserId = 0;
   private loginArray: Array<any>;
-
-  private token:string = '';
-
-  private currentUserId = 0;
 
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Bearer ' + this.token
     })
   };
 
@@ -48,20 +44,15 @@ export class GoServiceService {
     return this.httpClient.post<MessageResponse>(url,order,this.httpOptions).pipe(map(response => response.result));
   }
 
-  addUser(user:any): Observable<string> {
-    const url = this.baseUrl+"signup";
-    return this.httpClient.post<MessageResponse>(url,user,this.httpOptions).pipe(map(response => response.result));
-  }
+  // addUser(user:any): Observable<string> {
+  //   const url = this.baseUrl+"signup";
+  //   return this.httpClient.post<MessageResponse>(url,user,this.httpOptions).pipe(map(response => response.result));
+  // }
 
   addQuery(query:any): Observable<string> {
     const url = this.baseUrl+"createQuery";
     return this.httpClient.post<MessageResponse>(url,query,this.httpOptions).pipe(map(response => response.result));
   }
-
-  // addCart(productId: number, price: number, userId: number): Observable<string> {
-  //   const url = this.baseUrl+"saveCart";
-  //   return this.httpClient.post<MessageResponse>(url,cart,this.httpOptions);
-  // }
 
   getProducts(): Observable<Product[]>
   {
@@ -95,11 +86,54 @@ export class GoServiceService {
     return this.httpClient.get<Cart[]>(url);
   }
 
-  login(user: any): void{
-    const url = this.baseUrl + "login";
-    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => [response.accessToken, response.id])).subscribe(data=>{this.loginArray = data});
-    this.token = this.loginArray[0];
-    this.currentUserId = this.loginArray[1];
+  login(email: string, password: string): Observable<any>{
+    return this.httpClient.post<MessageResponse>(this.baseUrl + "login", {email, password}, this.httpOptions).pipe(map(response => response.result));
+  }
+
+  register(email: string, password: string, firstName: string, lastName: string, phoneNumber: string, addressLine1: string, addressLine2: string, state: string, pincode: number): Observable<string>{
+    return this.httpClient.post<MessageResponse>(this.baseUrl + "signup", {email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode}, this.httpOptions).pipe(map(response => response.result));
+  }
+
+  signOut(): void {
+    window.sessionStorage.clear();
+  }
+
+  public saveToken(token: string): void {
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.setItem(TOKEN_KEY, token);
+  }
+
+  public getToken(): string | null {
+    return window.sessionStorage.getItem(TOKEN_KEY);
+  }
+
+  public saveUser(user: any): void {
+    window.sessionStorage.removeItem(USER_KEY);
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+  }
+  
+  public getUser(): any {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user) {
+      return JSON.parse(user);
+    }
+
+    return {};
+  }
+
+  addCart(productId: number, price: number, userId: number): Observable<string> {
+    const url = this.baseUrl+"saveCart?productId=" + productId + "?price=" + price + "?userId=" + userId;
+    return this.httpClient.post<MessageResponse>(url,{productId, price, userId},this.httpOptions).pipe(map(response => response.result));
+  }
+
+  changeCart(productId: number, quantity: number, cartId: number): Observable<string> {
+    const url = this.baseUrl+"changeCart?cartId=" + cartId + "?quantity=" + quantity + "?productId=" + productId;
+    return this.httpClient.post<MessageResponse>(url,{productId, quantity, cartId},this.httpOptions).pipe(map(response => response.result));
+  }
+
+  deleteCart(cartId: number): Observable<string>{
+    const url = this.baseUrl+"deleteCart?cartId=" + cartId;
+    return this.httpClient.delete<MessageResponse>(url).pipe(map(response => response.result));
   }
 
 }
