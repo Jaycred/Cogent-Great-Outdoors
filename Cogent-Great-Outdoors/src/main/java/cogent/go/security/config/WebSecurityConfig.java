@@ -54,9 +54,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/go/login**").permitAll().antMatchers("/go/addUser**").permitAll().antMatchers("/go/signup**").permitAll()
-				.antMatchers("/go/findAllProducts**").permitAll().antMatchers("/go/findProductsByCategory**").permitAll()
-				.antMatchers("/go/findProductsById**").permitAll()
+				.antMatchers("/go/login").permitAll().antMatchers("/go/addUser**").permitAll().antMatchers("/go/signup").permitAll()
+				.antMatchers("/go/findAllProducts").permitAll().antMatchers("/go/findProductsByCategory").permitAll()
+				.antMatchers("/go/findProductsById").permitAll()
 				.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

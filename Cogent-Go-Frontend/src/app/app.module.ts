@@ -16,7 +16,6 @@ import { CategoryViewComponent } from './components/category-view/category-view.
 import { ProductSpecsComponent } from './components/product-specs/product-specs.component';
 import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { UserAccountComponent } from './components/user-account/user-account.component';
-import { UserLoginComponent } from './components/user-login/user-login.component';
 import { authInterceptorProviders } from './_helpers/auth-interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,7 +26,7 @@ const route: Routes = [
   {path: 'categories', component: CategoryViewComponent},
   {path: 'products/:id', component: ProductSpecsComponent},
   {path: 'products', component: ProductViewComponent},
-  {path: 'signup', component: UserAddComponentComponent},
+  {path: 'signup', component: RegisterComponent},//UserAddComponentComponent},
   {path: 'addProduct', component: ProductAddComponentComponent},
   {path: 'login', component: LoginComponent},
   {path: 'cart', component: CartViewComponent},
@@ -49,7 +48,6 @@ const route: Routes = [
     ProductSpecsComponent,
     CartViewComponent,
     UserAccountComponent,
-    UserLoginComponent,
     RegisterComponent,
     LoginComponent,
     ProfileComponent

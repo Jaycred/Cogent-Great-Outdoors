@@ -46,10 +46,10 @@ export class GoServiceService {
     return this.httpClient.post<MessageResponse>(url,order,this.httpOptions).pipe(map(response => response.result));
   }
 
-  // addUser(user:any): Observable<string> {
-  //   const url = this.baseUrl+"signup";
-  //   return this.httpClient.post<MessageResponse>(url,user,this.httpOptions).pipe(map(response => response.result));
-  // }
+ addUser(user:any): Observable<string> {
+  const url = this.baseUrl+"signup";
+     return this.httpClient.post<MessageResponse>(url,user,this.httpOptions).pipe(map(response => response.result));
+   }
 
   addQuery(query:any): Observable<string> {
     const url = this.baseUrl+"createQuery";
@@ -88,13 +88,14 @@ export class GoServiceService {
     return this.httpClient.get<Cart[]>(url);
   }
 
+  /*
   login(user: any): void{
     const url = this.baseUrl + "login";
     this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => response.accessToken)).subscribe(data=>this.token = data);
     //this.token = this.loginArray[0];
     //this.currentUserId = this.loginArray[1];
     console.log(this.token);
-/*
+  }
   login(email: string, password: string): Observable<any>{
     return this.httpClient.post<MessageResponse>(this.baseUrl + "login", {email, password}, this.httpOptions).pipe(map(response => response.result));
   }
