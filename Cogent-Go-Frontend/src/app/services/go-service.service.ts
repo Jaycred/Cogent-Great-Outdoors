@@ -18,7 +18,9 @@ export class GoServiceService {
 
   private baseUrl = 'http://localhost:5000/go/';
   private currentUserId = 0;
-  private loginArray: Array<any>;
+
+  private loginArray: Array<any> = [];
+
 
 
   httpOptions = {
@@ -86,9 +88,17 @@ export class GoServiceService {
     return this.httpClient.get<Cart[]>(url);
   }
 
+  login(user: any): void{
+    const url = this.baseUrl + "login";
+    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => response.accessToken)).subscribe(data=>this.token = data);
+    //this.token = this.loginArray[0];
+    //this.currentUserId = this.loginArray[1];
+    console.log(this.token);
+/*
   login(email: string, password: string): Observable<any>{
     return this.httpClient.post<MessageResponse>(this.baseUrl + "login", {email, password}, this.httpOptions).pipe(map(response => response.result));
   }
+  */
 
   register(email: string, password: string, firstName: string, lastName: string, phoneNumber: string, addressLine1: string, addressLine2: string, state: string, pincode: number): Observable<string>{
     return this.httpClient.post<MessageResponse>(this.baseUrl + "signup", {email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode}, this.httpOptions).pipe(map(response => response.result));
@@ -134,6 +144,7 @@ export class GoServiceService {
   deleteCart(cartId: number): Observable<string>{
     const url = this.baseUrl+"deleteCart?cartId=" + cartId;
     return this.httpClient.delete<MessageResponse>(url).pipe(map(response => response.result));
+
   }
 
 }
