@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GoServiceService } from './go-service.service';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -7,9 +8,11 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class TokenStorageService {
-  constructor() { }
+  constructor(private gs: GoServiceService) { }
 
   signOut(): void {
+    const query = this.getUser().email + " logged out.";
+    this.gs.addQuery(query);
     window.sessionStorage.clear();
     window.location.reload();
   }
