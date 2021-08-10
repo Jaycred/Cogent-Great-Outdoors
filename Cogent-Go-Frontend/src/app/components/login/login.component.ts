@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
   form: any = {
     email: null,
     password: null
-  };
+  }
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
