@@ -19,6 +19,7 @@ import { authInterceptorProviders } from './_helpers/auth-interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EditCartComponent } from './components/edit-cart/edit-cart.component';
 
 const route: Routes = [
   {path: 'categories/:categoryName', component: ProductViewComponent},
@@ -50,7 +51,8 @@ const route: Routes = [
     UserAccountComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditCartComponent
 
   ],
   imports: [

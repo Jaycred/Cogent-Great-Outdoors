@@ -14,13 +14,15 @@ export class ProductSpecsComponent implements OnInit {
 
   id: number;
   product: Product;
+  user: User;
   message:string;
   constructor(private gs: GoServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(()=>{
       this.id = +this.route.snapshot.paramMap.get("id");
-    this.findById(this.id);
+      this.findById(this.id);
+      this.findUser();
     })
   }
 
@@ -31,8 +33,12 @@ export class ProductSpecsComponent implements OnInit {
     });
   }
 
+  findUser(){
+    this.user = this.gs.getUser();
+  }
+
   addToCart(){
-    
+    this.gs.addCart(this.id, this.product.price, this.user.userId).subscribe(data=>{this.message=data});
   }
 
 }
