@@ -13,7 +13,7 @@
               </a>
               <h2>{{ product.description }}</h2>
               <div class="price">{{ product.price | currency:'USD' }}</div>
-              <button onclick="addToCart()" class="primary-btn">Add to cart</button>
+              <button (click)="addToCart()" class="primary-btn">Add to cart</button>
             </div>
           </div>
         </div>
