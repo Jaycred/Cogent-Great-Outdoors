@@ -31,59 +31,80 @@ export class GoServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
+  updateHttpOptions() {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.getToken()
+      })
+    };
+  }
+
+
   addProduct(p:any): Observable<string> {
+    this.updateHttpOptions();
     const url = this.baseUrl+"addProduct";
     return this.httpClient.post<MessageResponse>(url,p,this.httpOptions).pipe(map(response => response.result));
   }
 
   addAddress(da:any): Observable<string> {
+    this.updateHttpOptions();
     const url = this.baseUrl+"addAddress";
     return this.httpClient.post<MessageResponse>(url,da,this.httpOptions).pipe(map(response => response.result));
   }
 
   addOrder(order:any): Observable<string> {
+    this.updateHttpOptions();
     const url = this.baseUrl+"placeOrder";
     return this.httpClient.post<MessageResponse>(url,order,this.httpOptions).pipe(map(response => response.result));
   }
 
  addUser(user:any): Observable<string> {
+  this.updateHttpOptions();
   const url = this.baseUrl+"signup";
      return this.httpClient.post<MessageResponse>(url,user,this.httpOptions).pipe(map(response => response.result));
    }
 
   addQuery(query:any): Observable<string> {
+    this.updateHttpOptions();
     const url = this.baseUrl+"createQuery";
     return this.httpClient.post<MessageResponse>(url,query,this.httpOptions).pipe(map(response => response.result));
   }
 
   getProducts(): Observable<Product[]>
   {
+    this.updateHttpOptions();
     const url = this.baseUrl + "findAllProducts";
     return this.httpClient.get<Product[]>(url);
   }
 
   getProductsById(id: number): Observable<Product[]>
   {
+    this.updateHttpOptions();
     const url = `${this.baseUrl}findProductsById?id=${id}`;
     return this.httpClient.get<Product[]>(url);
   }
   getProductsByCategory(cName: string): Observable<Product[]>
   {
+    this.updateHttpOptions();
     const url = `${this.baseUrl}findProductsByCategory?category=${cName}`;
     return this.httpClient.get<Product[]>(url);
   }
 
   getCarts(): Observable<Cart[]>{
+    this.updateHttpOptions();
     const url = this.baseUrl + "findAllCarts";
     return this.httpClient.get<Cart[]>(url);
   }
 
   getCartsById(id: number): Observable<Cart[]>{
+    this.updateHttpOptions();
     const url = `${this.baseUrl}findCartsById?id=${id}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
   getCartsByUserId(userId: number): Observable<Cart[]>{
+    this.updateHttpOptions();
     const url = `${this.baseUrl}findCartsByUserId?id=${userId}`;
     return this.httpClient.get<Cart[]>(url);
   }
@@ -102,16 +123,19 @@ export class GoServiceService {
   */
 
   register(email: string, password: string, firstName: string, lastName: string, phoneNumber: string, addressLine1: string, addressLine2: string, state: string, pincode: number): Observable<string>{
+    this.updateHttpOptions();
     return this.httpClient.post<MessageResponse>(this.baseUrl + "signup", {email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode}, this.httpOptions).pipe(map(response => response.result));
   }
 
   signOut(): void {
     window.sessionStorage.clear();
+    this.updateHttpOptions();
   }
 
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
+    this.updateHttpOptions();
   }
 
   public getToken(): string | null {
@@ -119,6 +143,7 @@ export class GoServiceService {
   }
 
   public saveUser(user: any): void {
+    this.updateHttpOptions();
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
@@ -133,16 +158,19 @@ export class GoServiceService {
   }
 
   addCart(productId: number, price: number, userId: number): Observable<string> {
+    this.updateHttpOptions();
     const url = this.baseUrl+"saveCart?productId=" + productId + "?price=" + price + "?userId=" + userId;
     return this.httpClient.post<MessageResponse>(url,{productId, price, userId},this.httpOptions).pipe(map(response => response.result));
   }
 
   changeCart(productId: number, quantity: number, cartId: number): Observable<string> {
+    this.updateHttpOptions();
     const url = this.baseUrl+"changeCart?cartId=" + cartId + "?quantity=" + quantity + "?productId=" + productId;
     return this.httpClient.post<MessageResponse>(url,{productId, quantity, cartId},this.httpOptions).pipe(map(response => response.result));
   }
 
   deleteCart(cartId: number): Observable<string>{
+    this.updateHttpOptions();
     const url = this.baseUrl+"deleteCart?cartId=" + cartId;
     return this.httpClient.delete<MessageResponse>(url).pipe(map(response => response.result));
 
