@@ -21,6 +21,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { EditCartComponent } from './components/edit-cart/edit-cart.component';
+
 
 const route: Routes = [
   {path: 'categories/:categoryName', component: ProductViewComponent},
@@ -57,6 +59,7 @@ const route: Routes = [
     ProfileComponent,
     AboutComponent,
     ContactComponent
+    EditCartComponent
 
   ],
   imports: [
