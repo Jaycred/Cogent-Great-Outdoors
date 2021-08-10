@@ -7,6 +7,7 @@ import { Product } from '../common/product';
 import { Cart } from '../common/cart';
 import { User } from '../common/user';
 import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
+import { TokenStorageService } from './token-storage.service';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -29,13 +30,14 @@ export class GoServiceService {
     })
   };
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private ts: TokenStorageService) { }
 
   updateHttpOptions() {
+    console.log(this.ts.getToken());
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': this.getToken()
+        'Authorization': this.ts.getToken()
       })
     };
   }
@@ -127,20 +129,20 @@ export class GoServiceService {
     return this.httpClient.post<MessageResponse>(this.baseUrl + "signup", {email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode}, this.httpOptions).pipe(map(response => response.result));
   }
 
+  /*
   signOut(): void {
     window.sessionStorage.clear();
     this.updateHttpOptions();
   }
-
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
     this.updateHttpOptions();
   }
-
   public getToken(): string | null {
     return window.sessionStorage.getItem(TOKEN_KEY);
   }
+  */
 
   public saveUser(user: any): void {
     this.updateHttpOptions();
