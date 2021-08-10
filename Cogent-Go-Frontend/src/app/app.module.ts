@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductAddComponentComponent } from './components/product-add-component/product-add-component.component';
 import { AddressAddComponentComponent } from './components/address-add-component/address-add-component.component';
-import { UserAddComponentComponent } from './components/user-add-component/user-add-component.component';
 import { QueryAddComponentComponent } from './components/query-add-component/query-add-component.component';
 import { OrderAddComponentComponent } from './components/order-add-component/order-add-component.component';
 import { ProductViewComponent } from './components/product-view/product-view.component';
@@ -26,12 +25,14 @@ const route: Routes = [
   {path: 'categories', component: CategoryViewComponent},
   {path: 'products/:id', component: ProductSpecsComponent},
   {path: 'products', component: ProductViewComponent},
-  {path: 'signup', component: RegisterComponent},//UserAddComponentComponent},
   {path: 'addProduct', component: ProductAddComponentComponent},
   {path: 'login', component: LoginComponent},
   {path: 'cart', component: CartViewComponent},
   {path: 'cart/:cartId', component:CartViewComponent},
   {path: 'cart/user/:userId', component:CartViewComponent},
+  {path: 'signup', component: RegisterComponent},
+  {path: 'login', component:LoginComponent},
+  {path: 'token', component:ProfileComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
@@ -40,7 +41,6 @@ const route: Routes = [
     AppComponent,
     ProductAddComponentComponent,
     AddressAddComponentComponent,
-    UserAddComponentComponent,
     QueryAddComponentComponent,
     OrderAddComponentComponent,
     ProductViewComponent,
