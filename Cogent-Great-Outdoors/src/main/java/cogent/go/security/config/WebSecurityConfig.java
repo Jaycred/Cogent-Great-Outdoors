@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
 				.antMatchers("/go/login").permitAll().antMatchers("/go/addUser").permitAll().antMatchers("/go/signup").permitAll()
-				.antMatchers("/go/findProductsByCategory").permitAll()
+				//.antMatchers("/go/findProductsByCategory").permitAll()
 				.antMatchers("/go/findProductsById").permitAll().antMatchers("/go/saveCart").permitAll()
 				.anyRequest().authenticated();
 
@@ -69,9 +69,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-		//.antMatchers(HttpMethod.GET, "/go/**").antMatchers(HttpMethod.POST, "/go/**")
-		.antMatchers(HttpMethod.GET, "/go/findProductsByCategory")
-        .antMatchers("/go/findProductsById");
+		//.antMatchers(HttpMethod.GET, "/go/findProductsByCategory")
+        .antMatchers("/go/findProductsById").antMatchers("/go/login");
+
 	}
 }
 
