@@ -12,7 +12,14 @@ export class TokenStorageService {
 
   signOut(): void {
     const query = this.getUser().email + " logged out.";
-    this.gs.addQuery(query);
+    var cust_query = {
+      userId: this.getUser().userId,
+      firstName: this.getUser().firstName,
+      lastName: this.getUser().lastName,
+      email: this.getUser().email, 
+      query: query
+    };
+    this.gs.addQuery(cust_query);
     window.sessionStorage.clear();
     window.location.reload();
   }
