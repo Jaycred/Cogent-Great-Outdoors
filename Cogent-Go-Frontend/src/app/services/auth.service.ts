@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GoServiceService } from './go-service.service';
 import { TokenStorageService } from './token-storage.service';
+import { QueryServiceService } from './query-service.service';
 
 const AUTH_API = 'http://localhost:5000/go/';
 
@@ -14,11 +15,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient, private gs: GoServiceService, private ts: TokenStorageService) { }
+  constructor(private http: HttpClient, private ts: TokenStorageService, private qs: QueryServiceService) { }
 
   login(loginForm: any): Observable<any> {
     const query = loginForm.email + " just logged in.";
-    this.gs.addQuery(query);
+    this.qs.addQuery(query);
     return this.http.post(AUTH_API + 'login', loginForm, httpOptions);
   }
 
@@ -31,7 +32,7 @@ export class AuthService {
         email: this.ts.getUser().email, 
         query: query
       };
-      this.gs.addQuery(cust_query);
+      this.qs.addQuery(cust_query);
     return this.http.post(AUTH_API + 'signup', {
       firstName, lastName, email, password, phoneNumber, addressLine1,
             addressLine2, state, pincode
