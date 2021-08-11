@@ -3,7 +3,6 @@ import { Cart } from 'src/app/common/cart';
 import { GoServiceService } from 'src/app/services/go-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/common/product';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-edit-cart',
@@ -21,7 +20,7 @@ export class EditCartComponent implements OnInit {
   cartId: number;
   userId: number;
   cartList: Cart[];
-  constructor(private gs: GoServiceService, private route: ActivatedRoute, private ts: TokenStorageService) { }
+  constructor(private gs: GoServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(()=>{
@@ -45,7 +44,7 @@ export class EditCartComponent implements OnInit {
   
 
   viewCarts(){
-    this.gs.getCartsByUserId(this.ts.getUser().id).subscribe(data => {this.cartList = data;});
+    this.gs.getCartsByUserId(this.gs.getUser().id).subscribe(data => {this.cartList = data;});
   }
 
   findById(cartId: number){

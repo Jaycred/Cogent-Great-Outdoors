@@ -185,14 +185,11 @@ public class GoController {
 					.body(new MessageResponse("Error: Username/email is already taken!"));
 		}
 
-		////////////////////////////FIX///////////////////////////////
 		// Create new user's account
 		User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getPhoneNumber(),
 							signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()),
 							signUpRequest.getAddressLine1(), signUpRequest.getAddressLine2(), signUpRequest.getState(),
 							signUpRequest.getPincode());
-
-		//////////////////////////////FIX/////////////////////////////////////////
 
 		service.saveUser(user);
 		// mail service to send plain text mail to user's email account about successful

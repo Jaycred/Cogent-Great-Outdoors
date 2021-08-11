@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GoServiceService } from 'src/app/services/go-service.service';
 import { AuthService } from '../../services/auth.service';
-import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
 
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, private tokenStorage: GoServiceService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
 
-        //this.reloadPage();
+        this.reloadPage();
       },
       err => {
         this.errorMessage = err.error.message;
