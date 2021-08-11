@@ -9,9 +9,12 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class TokenStorageService {
+
   constructor(private qs: QueryServiceService) { }
 
+
   signOut(): void {
+
     const query = this.getUser().email + " logged out.";
     var cust_query = {
       userId: this.getUser().userId,
@@ -20,7 +23,9 @@ export class TokenStorageService {
       email: this.getUser().email, 
       query: query
     };
+
     this.qs.addQuery(cust_query);
+
     window.sessionStorage.clear();
     window.location.reload();
   }
@@ -28,6 +33,7 @@ export class TokenStorageService {
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
+    console.log(token);
   }
 
   public getToken(): string | null {
