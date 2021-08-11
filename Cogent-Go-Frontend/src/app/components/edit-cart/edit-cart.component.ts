@@ -44,7 +44,7 @@ export class EditCartComponent implements OnInit {
   
 
   viewCarts(){
-    this.gs.getCartsByUserId(this.gs.getUser().id).subscribe(data => {this.cartList = data;});
+    this.gs.getCarts().subscribe(data => {this.cartList = data;});
   }
 
   findById(cartId: number){

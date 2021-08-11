@@ -108,43 +108,43 @@ public class GoController {
 	
 	@PostMapping("/changeCart")
     public ResponseEntity<String> changeCart(@RequestParam("cartId") int cartId, @RequestParam("quantity")int quantity, @RequestParam("productId")int productId) {
-		Optional<Cart> cart = service.getCartById(cartId);
-		if(cart.isPresent()) {
+		List<Cart> cart_list = service.getCartById(cartId);
+		if(cart_list != null) {
+			Cart cart = cart_list.get(0);
 			Product product = service.getProductById(productId).get(0);
-			cart.get().setProduct(product);
-			cart.get().setQuantity(quantity);
-			cart.get().setPrice(quantity*product.getPrice());
-			return new ResponseEntity<>("Cart #" + cart.get().getCartId() + " changes were saved.", HttpStatus.OK);
+			cart.setProduct(product);
+			cart.setQuantity(quantity);
+			cart.setPrice(quantity*product.getPrice());
+			service.saveCart(cart);
+			return new ResponseEntity<>("Cart #" + cart.getCartId() + " changes were saved.", HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Cart #" + cart.get().getCartId() + " was not found!", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Cart #" + cartId + " was not found!", HttpStatus.NOT_FOUND);
 		
     }
 	
 	@DeleteMapping("/deleteCart")
 	public ResponseEntity<String> deleteCart(@RequestParam("cartId") int cartId){
-		Cart cart = service.getCartById(cartId).get();
+		Cart cart = service.getCartById(cartId).get(0);
 		service.deleteCart(cart);
 		return new ResponseEntity<>("Cart #" + cartId + " was deleted.", HttpStatus.OK);
 	}
 	
-	@GetMapping("/getCart")
+	@GetMapping("/getCartByUser")
 	public List<Cart> getCart(@RequestParam("userId") int userId)
 	{
 		List<Cart> cartContents = service.getCartByUserId(userId);
 		return cartContents;
 	}
 	
-	
-	/*
 	@GetMapping("/findAllCarts")
-	public List<Product> getCartList(){
-		return service.getProductList();
+	public List<Cart> getCartList(){
+		return service.getCartList();
 	}
-	@GetMapping("/getCartsByUser")
-	public List<Product> getCartList(){
-		return service.getProductList();
+	@GetMapping("/getCartById")
+	public List<Cart> getCartById(@RequestParam("cartId") int cartId){
+		return service.getCartById(cartId);
 	}
-	*/
+	
 	
 	@GetMapping("/findAllProducts")
 	public List<Product> getProductList(){
