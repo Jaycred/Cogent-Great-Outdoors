@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/common/product';
 import { User } from 'src/app/common/user';
 import { GoServiceService } from 'src/app/services/go-service.service';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-product-specs',
@@ -16,7 +15,7 @@ export class ProductSpecsComponent implements OnInit {
   product: Product;
   user: User;
   message:string;
-  constructor(private gs: GoServiceService, private route: ActivatedRoute, private ts: TokenStorageService) { }
+  constructor(private gs: GoServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(()=>{
@@ -33,7 +32,7 @@ export class ProductSpecsComponent implements OnInit {
   }
 
   addToCart(){
-    this.gs.addCart(this.id, this.product.price, this.ts.getUser().id).subscribe(data=>{this.message=data});
+    this.gs.addCart(this.id, this.product.price, this.gs.getUser().id).subscribe(data=>{this.message=data});
   }
 
 }

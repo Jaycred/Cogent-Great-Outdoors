@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from '../../services/token-storage.service';
+import { GoServiceService } from 'src/app/services/go-service.service';
+
 
 @Component({
   selector: 'app-user-account',
@@ -10,15 +11,15 @@ export class UserAccountComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
-  constructor(private tokenStorage: TokenStorageService) { }
+  constructor(private gs: GoServiceService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorage.getToken();
+    this.isLoggedIn = !!this.gs.getToken();
   }
 
   signOut()
   {
-    this.tokenStorage.signOut();
+    this.gs.signOut();
   }
 
 }
