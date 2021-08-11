@@ -78,6 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 	
+
 	/*
 	@Bean
     CorsConfigurationSource corsConfigurationSource() {
@@ -86,6 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
     */
+
 }
 
 /*

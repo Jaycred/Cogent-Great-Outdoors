@@ -129,7 +129,7 @@ public class GoController {
 		return new ResponseEntity<>("Cart #" + cartId + " was deleted.", HttpStatus.OK);
 	}
 	
-	@GetMapping("/getCartByUser")
+	@GetMapping("/getCart")
 	public List<Cart> getCart(@RequestParam("userId") int userId)
 	{
 		return service.getCartByUserId(userId);
