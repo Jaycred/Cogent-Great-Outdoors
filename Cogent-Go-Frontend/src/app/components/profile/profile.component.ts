@@ -9,9 +9,9 @@ import { GoServiceService } from 'src/app/services/go-service.service';
 export class ProfileComponent implements OnInit {
   currentUser: any;
 
-  constructor(private gs: GoServiceService) { }
+  constructor(private token: GoServiceService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.gs.getUser();
+    this.currentUser = this.token.getUser();
   }
 }
