@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -124,6 +125,13 @@ public class GoController {
 		Cart cart = service.getCartById(cartId).get();
 		service.deleteCart(cart);
 		return new ResponseEntity<>("Cart #" + cartId + " was deleted.", HttpStatus.OK);
+	}
+	
+	@GetMapping("/getCart")
+	public List<Cart> getCart(@RequestParam("userId") int userId)
+	{
+		List<Cart> cartContents = service.getCartByUserId(userId);
+		return cartContents;
 	}
 	
 	

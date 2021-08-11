@@ -14,6 +14,8 @@ public class CogentGreatOutdoorsApplication {
 		SpringApplication.run(CogentGreatOutdoorsApplication.class, args);
 	}
 	
+
+	/*
 	@Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
@@ -23,5 +25,6 @@ public class CogentGreatOutdoorsApplication {
             }
         };
     }
+    */
 
 }

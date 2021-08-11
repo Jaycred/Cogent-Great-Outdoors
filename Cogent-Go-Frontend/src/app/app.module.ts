@@ -31,9 +31,9 @@ const route: Routes = [
   {path: 'products', component: ProductViewComponent},
   {path: 'addProduct', component: ProductAddComponentComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'cart', component: CartViewComponent},
-  {path: 'cart/:cartId', component:CartViewComponent},
-  {path: 'cart/user/:userId', component:CartViewComponent},
+  {path: 'cart', component: EditCartComponent},
+  {path: 'cart/:cartId', component:EditCartComponent},
+  {path: 'cart/user/:userId', component:EditCartComponent},
   {path: 'contact', component:ContactComponent},
   {path: 'about', component: AboutComponent},
   {path: 'signup', component: RegisterComponent},
@@ -58,7 +58,7 @@ const route: Routes = [
     LoginComponent,
     ProfileComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
     EditCartComponent
 
   ],

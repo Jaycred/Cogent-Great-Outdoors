@@ -1,5 +1,6 @@
 package cogent.go.security.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,7 +74,7 @@ public class JwtUserDetailsImpl implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>();
 	}
 
 	@Override
