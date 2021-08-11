@@ -26,9 +26,7 @@ export class EditCartComponent implements OnInit {
     this.route.paramMap.subscribe(()=>{
       this.cartId = +this.route.snapshot.paramMap.get("cartId");
       this.userId = +this.route.snapshot.paramMap.get("userId");
-      if(this.cartId != 0) this.findById(this.cartId);
-      else if(this.userId != 0) this.findByUserId(this.userId);
-      else this.viewCarts();
+      this.viewCarts();
     });
   }
 
@@ -44,7 +42,7 @@ export class EditCartComponent implements OnInit {
   
 
   viewCarts(){
-    this.gs.getCarts().subscribe(data => {this.cartList = data;});
+    this.gs.getCartsByUserId(this.gs.getUser().id).subscribe(data => {this.cartList = data});
   }
 
   findById(cartId: number){

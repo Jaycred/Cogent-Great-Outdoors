@@ -105,7 +105,7 @@ export class GoServiceService {
 
   getCartsByUserId(userId: number): Observable<Cart[]>{
     this.updateHttpOptions();
-    const url = `${this.baseUrl}getCartByUser?userId=${userId}`;
+    const url = `${this.baseUrl}getCart?userId=${userId}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
@@ -135,7 +135,6 @@ export class GoServiceService {
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
-    console.log(token);
   }
 
   public getToken(): string | null {
@@ -145,7 +144,6 @@ export class GoServiceService {
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    console.log(JSON.stringify(user));
   }
 
   public getUser(): any {

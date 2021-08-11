@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import cogent.go.service.GoService;
+import io.jsonwebtoken.Jwts;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired

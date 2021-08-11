@@ -132,8 +132,7 @@ public class GoController {
 	@GetMapping("/getCartByUser")
 	public List<Cart> getCart(@RequestParam("userId") int userId)
 	{
-		List<Cart> cartContents = service.getCartByUserId(userId);
-		return cartContents;
+		return service.getCartByUserId(userId);
 	}
 	
 	@GetMapping("/findAllCarts")
