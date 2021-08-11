@@ -109,6 +109,54 @@ export class GoServiceService {
     return this.httpClient.get<Cart[]>(url);
   }
 
+  register(email: string, password: string, firstName: string, lastName: string, phoneNumber: string, addressLine1: string, addressLine2: string, state: string, pincode: number): Observable<string>{
+    this.updateHttpOptions();
+    return this.httpClient.post<MessageResponse>(this.baseUrl + "signup", {email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode}, this.httpOptions).pipe(map(response => response.result));
+  }
+
+
+
+  signOut(): void {
+    const query = this.getUser().email + " logged out.";
+    var cust_query = {
+      userId: this.getUser().userId,
+      firstName: this.getUser().firstName,
+      lastName: this.getUser().lastName,
+      email: this.getUser().email, 
+      query: query
+    };
+
+    this.addQuery(cust_query);
+
+    window.sessionStorage.clear();
+    window.location.reload();
+  }
+
+  public saveToken(token: string): void {
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.setItem(TOKEN_KEY, token);
+    console.log(token);
+  }
+
+  public getToken(): string | null {
+    return window.sessionStorage.getItem(TOKEN_KEY);
+  }
+
+  public saveUser(user: any): void {
+    window.sessionStorage.removeItem(USER_KEY);
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    console.log(JSON.stringify(user));
+  }
+
+  public getUser(): any {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user) {
+      return JSON.parse(user);
+    }
+
+    return {};
+  }
+
   addCart(productId: number, price: number, userId: number): Observable<string> {
     this.updateHttpOptions();
 
@@ -158,47 +206,7 @@ export class GoServiceService {
 
   }
 
-  signOut(): void {
 
-    const query = this.getUser().email + " logged out.";
-    var cust_query = {
-      userId: this.getUser().userId,
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-
-    this.addQuery(cust_query);
-
-    window.sessionStorage.clear();
-    window.location.reload();
-  }
-
-  public saveToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
-    console.log(token);
-  }
-
-  public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
-  }
-
-  public saveUser(user: any): void {
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    console.log(JSON.stringify(user));
-  }
-
-  public getUser(): any {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
-    }
-
-    return {};
-  }
 
   login(loginForm: any): Observable<any> {
     const query = loginForm.email + " just logged in.";
@@ -211,7 +219,7 @@ export class GoServiceService {
     this.addQuery(cust_query);
     return this.httpClient.post(this.baseUrl + 'login', loginForm, this.httpOptions);
   }
-
+/*
   register(firstName: string, lastName: string, email: string, password: string, phoneNumber: string, addressLine1: string,
     addressLine2: string, state: string, pincode: number): Observable<any> {
       const query = "New User registered: " + email;
@@ -227,7 +235,7 @@ export class GoServiceService {
             addressLine2, state, pincode
     }, this.httpOptions);
   }
-
+*/
 }
 
 interface MessageResponse{  
