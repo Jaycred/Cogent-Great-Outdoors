@@ -30,13 +30,14 @@ export class LoginComponent implements OnInit {
 
     this.gs.login(this.form).subscribe(
       data => {
+        console.log(data);
         this.gs.saveToken(data.accessToken);
         this.gs.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
 
-        //this.reloadPage();
+        this.reloadPage();
       },
       err => {
         this.errorMessage = err.error.message;

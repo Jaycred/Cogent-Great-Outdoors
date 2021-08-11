@@ -109,54 +109,6 @@ export class GoServiceService {
     return this.httpClient.get<Cart[]>(url);
   }
 
-  /*
-  login(user: any): void{
-    const url = this.baseUrl + "login";
-    this.httpClient.post<TokenResponse>(url,user,this.httpOptions).pipe(map(response => response.accessToken)).subscribe(data=>this.token = data);
-    //this.token = this.loginArray[0];
-    //this.currentUserId = this.loginArray[1];
-    console.log(this.token);
-  }
-  login(email: string, password: string): Observable<any>{
-    return this.httpClient.post<MessageResponse>(this.baseUrl + "login", {email, password}, this.httpOptions).pipe(map(response => response.result));
-  }
-  */
-
-  // register(email: string, password: string, firstName: string, lastName: string, phoneNumber: string, addressLine1: string, addressLine2: string, state: string, pincode: number): Observable<string>{
-  //   this.updateHttpOptions();
-  //   return this.httpClient.post<MessageResponse>(this.baseUrl + "signup", {email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode}, this.httpOptions).pipe(map(response => response.result));
-  // }
-
-  /*
-  signOut(): void {
-    window.sessionStorage.clear();
-    this.updateHttpOptions();
-  }
-  public saveToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
-    this.updateHttpOptions();
-  }
-  public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
-  }
-  */
-
-  // public saveUser(user: any): void {
-  //   this.updateHttpOptions();
-  //   window.sessionStorage.removeItem(USER_KEY);
-  //   window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-  // }
-  
-  // public getUser(): any {
-  //   const user = window.sessionStorage.getItem(USER_KEY);
-  //   if (user) {
-  //     return JSON.parse(user);
-  //   }
-
-  //   return {};
-  // }
-
   addCart(productId: number, price: number, userId: number): Observable<string> {
     this.updateHttpOptions();
 
@@ -250,7 +202,13 @@ export class GoServiceService {
 
   login(loginForm: any): Observable<any> {
     const query = loginForm.email + " just logged in.";
-    this.addQuery(query);
+    var cust_query = {
+      firstName: this.getUser().firstName,
+      lastName: this.getUser().lastName,
+      email: this.getUser().email, 
+      query: query
+    };
+    this.addQuery(cust_query);
     return this.httpClient.post(this.baseUrl + 'login', loginForm, this.httpOptions);
   }
 
