@@ -33,7 +33,6 @@ export class GoServiceService {
   constructor(private httpClient: HttpClient, private ts: TokenStorageService) { }
 
   updateHttpOptions() {
-    console.log(this.ts.getToken());
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -107,7 +106,7 @@ export class GoServiceService {
 
   getCartsByUserId(userId: number): Observable<Cart[]>{
     this.updateHttpOptions();
-    const url = `${this.baseUrl}findCartsByUserId?id=${userId}`;
+    const url = `${this.baseUrl}getCart/${userId}`;
     return this.httpClient.get<Cart[]>(url);
   }
 
@@ -161,19 +160,49 @@ export class GoServiceService {
 
   addCart(productId: number, price: number, userId: number): Observable<string> {
     this.updateHttpOptions();
-    const url = this.baseUrl+"saveCart?productId=" + productId + "?price=" + price + "?userId=" + userId;
+
+    const url = this.baseUrl+"saveCart?productId=" + productId + "&price=" + price + "&userId=" + userId;
+    const query = "User #" + userId + " just added Product #" + productId + " to their cart.";
+    var cust_query = {
+      userId: userId,
+      firstName: this.ts.getUser().firstName,
+      lastName: this.ts.getUser().lastName,
+      email: this.ts.getUser().email, 
+      query: query
+    };
+    this.addQuery(cust_query);
+
     return this.httpClient.post<MessageResponse>(url,{productId, price, userId},this.httpOptions).pipe(map(response => response.result));
   }
 
   changeCart(productId: number, quantity: number, cartId: number): Observable<string> {
     this.updateHttpOptions();
-    const url = this.baseUrl+"changeCart?cartId=" + cartId + "?quantity=" + quantity + "?productId=" + productId;
+    const url = this.baseUrl+"changeCart?cartId=" + cartId + "&quantity=" + quantity + "&productId=" + productId;
+
+    const query = "Cart #" + cartId + " updated: Product ID: " + productId + ", Quantity: " + quantity;
+    var cust_query = {
+      userId: this.ts.getUser().userId,
+      firstName: this.ts.getUser().firstName,
+      lastName: this.ts.getUser().lastName,
+      email: this.ts.getUser().email, 
+      query: query
+    };
+    this.addQuery(cust_query);
     return this.httpClient.post<MessageResponse>(url,{productId, quantity, cartId},this.httpOptions).pipe(map(response => response.result));
   }
 
   deleteCart(cartId: number): Observable<string>{
     this.updateHttpOptions();
     const url = this.baseUrl+"deleteCart?cartId=" + cartId;
+    const query = "Cart #" + cartId + " deleted";
+    var cust_query = {
+      userId: this.ts.getUser().userId,
+      firstName: this.ts.getUser().firstName,
+      lastName: this.ts.getUser().lastName,
+      email: this.ts.getUser().email, 
+      query: query
+    };
+    this.addQuery(cust_query);
     return this.httpClient.delete<MessageResponse>(url).pipe(map(response => response.result));
 
   }
