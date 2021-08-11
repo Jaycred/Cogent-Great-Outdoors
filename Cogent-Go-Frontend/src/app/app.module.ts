@@ -58,7 +58,7 @@ const route: Routes = [
     LoginComponent,
     ProfileComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
     EditCartComponent
 
   ],
