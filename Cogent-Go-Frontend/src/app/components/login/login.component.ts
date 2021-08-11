@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { TokenStorageService } from '../../services/token-storage.service';
+import { GoServiceService } from 'src/app/services/go-service.service';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +16,10 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
 
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private gs: GoServiceService) { }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
+    if (this.gs.getToken()) {
       this.isLoggedIn = true;
 
     }
@@ -29,10 +28,10 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     const { email, password } = this.form;
 
-    this.authService.login(this.form).subscribe(
+    this.gs.login(this.form).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
+        this.gs.saveToken(data.accessToken);
+        this.gs.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
