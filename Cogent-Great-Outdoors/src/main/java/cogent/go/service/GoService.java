@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import cogent.go.security.service.*;
 import cogent.go.dao.CartRepository;
@@ -24,6 +25,7 @@ import cogent.go.entities.DeliveryAddress;
 import cogent.go.entities.Order;
 import cogent.go.entities.Product;
 import cogent.go.entities.User;
+
 
 @Service
 public class GoService implements UserDetailsService{
