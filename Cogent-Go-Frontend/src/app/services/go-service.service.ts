@@ -33,7 +33,6 @@ export class GoServiceService {
   constructor(private httpClient: HttpClient, private ts: TokenStorageService) { }
 
   updateHttpOptions() {
-    console.log(this.ts.getToken());
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

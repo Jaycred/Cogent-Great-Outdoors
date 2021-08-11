@@ -8,9 +8,10 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class TokenStorageService {
-  constructor(private gs: GoServiceService) { }
+  constructor(){}//private gs: GoServiceService) { }
 
   signOut(): void {
+    /*
     const query = this.getUser().email + " logged out.";
     var cust_query = {
       userId: this.getUser().userId,
@@ -20,6 +21,7 @@ export class TokenStorageService {
       query: query
     };
     this.gs.addQuery(cust_query);
+    */
     window.sessionStorage.clear();
     window.location.reload();
   }
@@ -27,6 +29,7 @@ export class TokenStorageService {
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
+    console.log(token);
   }
 
   public getToken(): string | null {
