@@ -17,6 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -58,9 +61,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/go/login").permitAll().antMatchers("/go/addUser").permitAll().antMatchers("/go/signup").permitAll()
+				//.antMatchers("/go/login").permitAll().antMatchers("/go/addUser").permitAll().antMatchers("/go/signup").permitAll()
 				//.antMatchers("/go/findProductsByCategory").permitAll()
-				.antMatchers("/go/findProductsById").permitAll().antMatchers("/go/saveCart").permitAll()
+				//.antMatchers("/go/findProductsById").permitAll().antMatchers("/go/saveCart").permitAll()
 				.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -69,10 +72,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-		//.antMatchers(HttpMethod.GET, "/go/findProductsByCategory")
-        .antMatchers("/go/findProductsById").antMatchers("/go/login");
+		.antMatchers(HttpMethod.GET, "/go/findProductsByCategory")
+        .antMatchers("/go/findProductsById").antMatchers("/go/login")
+        .antMatchers("/go/signup");
 
 	}
+	
+	/*
+	@Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
+    }
+    */
 }
 
 /*
