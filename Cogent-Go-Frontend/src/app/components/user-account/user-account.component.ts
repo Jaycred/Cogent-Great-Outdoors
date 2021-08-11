@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoServiceService } from 'src/app/services/go-service.service';
 
-
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -11,15 +10,15 @@ export class UserAccountComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
-  constructor(private gs: GoServiceService) { }
+  constructor(private tokenStorage: GoServiceService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.gs.getToken();
+    this.isLoggedIn = !!this.tokenStorage.getToken();
   }
 
   signOut()
   {
-    this.gs.signOut();
+    this.tokenStorage.signOut();
   }
 
 }
