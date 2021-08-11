@@ -109,7 +109,6 @@ export class GoServiceService {
     return this.httpClient.get<Cart[]>(url);
   }
 
-
   register(email: string, password: string, firstName: string, lastName: string, phoneNumber: string, addressLine1: string, addressLine2: string, state: string, pincode: number): Observable<string>{
     this.updateHttpOptions();
     return this.httpClient.post<MessageResponse>(this.baseUrl + "signup", {email, password, firstName, lastName, phoneNumber, addressLine1, addressLine2, state, pincode}, this.httpOptions).pipe(map(response => response.result));
@@ -157,8 +156,6 @@ export class GoServiceService {
 
     return {};
   }
-
-
 
   addCart(productId: number, price: number, userId: number): Observable<string> {
     this.updateHttpOptions();
@@ -209,6 +206,36 @@ export class GoServiceService {
 
   }
 
+
+
+  login(loginForm: any): Observable<any> {
+    const query = loginForm.email + " just logged in.";
+    var cust_query = {
+      firstName: this.getUser().firstName,
+      lastName: this.getUser().lastName,
+      email: this.getUser().email, 
+      query: query
+    };
+    this.addQuery(cust_query);
+    return this.httpClient.post(this.baseUrl + 'login', loginForm, this.httpOptions);
+  }
+/*
+  register(firstName: string, lastName: string, email: string, password: string, phoneNumber: string, addressLine1: string,
+    addressLine2: string, state: string, pincode: number): Observable<any> {
+      const query = "New User registered: " + email;
+      var cust_query = {
+        firstName: this.getUser().firstName,
+        lastName: this.getUser().lastName,
+        email: this.getUser().email, 
+        query: query
+      };
+      this.addQuery(cust_query);
+    return this.httpClient.post(this.baseUrl + 'signup', {
+      firstName, lastName, email, password, phoneNumber, addressLine1,
+            addressLine2, state, pincode
+    }, this.httpOptions);
+  }
+*/
 }
 
 interface MessageResponse{  

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { GoServiceService } from 'src/app/services/go-service.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private gs: GoServiceService) { }
 
   ngOnInit(): void {
   }
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
     const {firstName, lastName, email, password, phoneNumber, addressLine1,
             addressLine2, state, pincode} = this.form;
 
-    this.authService.register(firstName, lastName, email, password, phoneNumber, addressLine1,
+    this.gs.register(firstName, lastName, email, password, phoneNumber, addressLine1,
       addressLine2, state, pincode).subscribe(
       data => {
         console.log(data);
