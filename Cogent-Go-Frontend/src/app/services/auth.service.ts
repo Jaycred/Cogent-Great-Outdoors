@@ -18,7 +18,13 @@ export class AuthService {
 
   login(loginForm: any): Observable<any> {
     const query = loginForm.email + " just logged in.";
-    this.gs.addQuery(query);
+    var cust_query = {
+      firstName: this.gs.getUser().firstName,
+      lastName: this.gs.getUser().lastName,
+      email: this.gs.getUser().email, 
+      query: query
+    };
+    this.gs.addQuery(cust_query);
     return this.http.post(AUTH_API + 'login', loginForm, httpOptions);
   }
 

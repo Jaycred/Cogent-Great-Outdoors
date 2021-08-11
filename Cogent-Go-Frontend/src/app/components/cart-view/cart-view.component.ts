@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CartViewComponent implements OnInit {
 
+  cart: Cart;
   cartId: number;
   userId: number;
   cartList: Cart[];

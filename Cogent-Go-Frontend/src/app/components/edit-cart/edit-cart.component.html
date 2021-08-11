@@ -7,6 +7,7 @@
             <div class="product-box">
               <a routerLink="/carts/{{tempCart.product.productId}}">
                 <h1>{{ tempCart.product.productId }}</h1>
+                <img src='assets/placeholder.png' class="img-responsive">
               </a>
               <h2>Quantity: {{ tempCart.quantity }}</h2>
               <div class="price">{{ tempCart.product.price | currency:'USD' }} each</div>
