@@ -99,7 +99,7 @@ export class GoServiceService {
 
   getCartsById(id: number): Observable<Cart[]>{
     this.updateHttpOptions();
-    const url = `${this.baseUrl}findCartsById?id=${id}`;
+    const url = `${this.baseUrl}getCartById?cartId=${id}`;
     return this.httpClient.get<Cart[]>(url);
   }
 

@@ -23,7 +23,9 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
+
   constructor(private as: AuthService) { }
+
 
   ngOnInit(): void {
   }
@@ -32,7 +34,9 @@ export class RegisterComponent implements OnInit {
     const {firstName, lastName, email, password, phoneNumber, addressLine1,
             addressLine2, state, pincode} = this.form;
 
+
     this.as.register(firstName, lastName, email, password, phoneNumber, addressLine1,
+
       addressLine2, state, pincode).subscribe(
       data => {
         this.isSuccessful = true;
