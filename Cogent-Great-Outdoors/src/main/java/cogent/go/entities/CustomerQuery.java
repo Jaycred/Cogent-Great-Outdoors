@@ -33,10 +33,9 @@ public class CustomerQuery {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CustomerQuery(int custId, @Size(max = 30) String firstName, @Size(max = 30) String lastName,
+	public CustomerQuery(@Size(max = 30) String firstName, @Size(max = 30) String lastName,
 			@Size(max = 30) String email, String query) {
 		super();
-		this.custId = custId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

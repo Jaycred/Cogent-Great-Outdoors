@@ -79,6 +79,9 @@ public class GoController {
 	@PostMapping("/placeOrder")
     public ResponseEntity<String> addOrder(@RequestBody Order order) {
         service.saveOrder(order);
+        String query = order.getUser().getFirstName() + " just added " + order.getProduct().getProductName() + " to Order #" + order.getOrderId();
+        CustomerQuery custQuery = new CustomerQuery(order.getUser().getFirstName(), order.getUser().getLastName(), order.getUser().getEmail(), query);
+        service.saveQuery(custQuery);
         return new ResponseEntity<>("Order " + order.getOrderId() + " was placed.", HttpStatus.OK);
     }
 	
@@ -103,6 +106,9 @@ public class GoController {
 		User user = service.getUserById(userId);
 		Cart cart = new Cart(user, product, 1, price);
         service.saveCart(cart);
+        String query = cart.getUser().getFirstName() + " just added " + cart.getProduct().getProductName() + " to Cart #" + cart.getCartId();
+        CustomerQuery custQuery = new CustomerQuery(cart.getUser().getFirstName(), cart.getUser().getLastName(), cart.getUser().getEmail(), query);
+        service.saveQuery(custQuery);
         return new ResponseEntity<>("Cart #" + cart.getCartId() + " was saved.", HttpStatus.OK);
     }
 	
@@ -116,6 +122,9 @@ public class GoController {
 			cart.setQuantity(quantity);
 			cart.setPrice(quantity*product.getPrice());
 			service.saveCart(cart);
+			String query = cart.getUser().getFirstName() + " just updated Cart #" + cart.getCartId() + ": Product = " + cart.getProduct().getProductName() + ", Quantity = " + cart.getQuantity()+ ", Price = " + cart.getPrice();
+	        CustomerQuery custQuery = new CustomerQuery(cart.getUser().getFirstName(), cart.getUser().getLastName(), cart.getUser().getEmail(), query);
+	        service.saveQuery(custQuery);
 			return new ResponseEntity<>("Cart #" + cart.getCartId() + " changes were saved.", HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Cart #" + cartId + " was not found!", HttpStatus.NOT_FOUND);
@@ -126,6 +135,9 @@ public class GoController {
 	public ResponseEntity<String> deleteCart(@RequestParam("cartId") int cartId){
 		Cart cart = service.getCartById(cartId).get(0);
 		service.deleteCart(cart);
+		String query = cart.getUser().getFirstName() + " deleted Cart #" + cartId;
+        CustomerQuery custQuery = new CustomerQuery(cart.getUser().getFirstName(), cart.getUser().getLastName(), cart.getUser().getEmail(), query);
+        service.saveQuery(custQuery);
 		return new ResponseEntity<>("Cart #" + cartId + " was deleted.", HttpStatus.OK);
 	}
 	
@@ -170,6 +182,10 @@ public class GoController {
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
 		JwtUserDetailsImpl userDetails = (JwtUserDetailsImpl) authentication.getPrincipal();
+		
+		String query = userDetails.getFirstName() + " logged in.";
+		CustomerQuery custQuery = new CustomerQuery(userDetails.getFirstName(), userDetails.getLastName(), userDetails.getEmail(), query);
+        service.saveQuery(custQuery);
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(),
@@ -191,6 +207,11 @@ public class GoController {
 							signUpRequest.getPincode());
 
 		service.saveUser(user);
+		
+		String query = "New Customer registered [Name: " + user.getFirstName() + " " + user.getLastName() + ", Email: " + user.getEmail() + "]";
+        CustomerQuery custQuery = new CustomerQuery(user.getFirstName(), user.getLastName(), user.getEmail(), query);
+        service.saveQuery(custQuery);
+        
 		// mail service to send plain text mail to user's email account about successful
 		// registration
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
