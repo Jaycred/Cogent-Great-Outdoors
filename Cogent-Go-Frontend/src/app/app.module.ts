@@ -38,7 +38,7 @@ const route: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'signup', component: RegisterComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'token', component:ProfileComponent},
+  {path: 'profile', component:ProfileComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 

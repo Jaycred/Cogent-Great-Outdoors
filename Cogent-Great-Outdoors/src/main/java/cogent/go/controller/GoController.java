@@ -109,7 +109,7 @@ public class GoController {
 	@PostMapping("/changeCart")
     public ResponseEntity<String> changeCart(@RequestParam("cartId") int cartId, @RequestParam("quantity")int quantity, @RequestParam("productId")int productId) {
 		List<Cart> cart_list = service.getCartById(cartId);
-		if(cart_list != null) {
+		if(cart_list != null && quantity > 0) {
 			Cart cart = cart_list.get(0);
 			Product product = service.getProductById(productId).get(0);
 			cart.setProduct(product);
@@ -118,7 +118,14 @@ public class GoController {
 			service.saveCart(cart);
 			return new ResponseEntity<>("Cart #" + cart.getCartId() + " changes were saved.", HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Cart #" + cartId + " was not found!", HttpStatus.NOT_FOUND);
+		else if(quantity == 0)
+		{
+			return deleteCart(cartId);
+		}
+		else
+		{
+			return new ResponseEntity<>("Cart #" + cartId + " was not found or new quantity is invalid", HttpStatus.NOT_FOUND);
+		}
 		
     }
 	
