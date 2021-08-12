@@ -3,6 +3,8 @@ import { Cart } from 'src/app/common/cart';
 import { GoServiceService } from 'src/app/services/go-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/common/product';
+import { Order } from 'src/app/common/order';
+import { CheckoutComponent } from '../checkout/checkout.component';
 
 @Component({
   selector: 'app-edit-cart',
@@ -38,6 +40,7 @@ export class EditCartComponent implements OnInit {
       this.userId = +this.route.snapshot.paramMap.get("userId");
       */
       this.viewCarts();
+
     });
   }
 
