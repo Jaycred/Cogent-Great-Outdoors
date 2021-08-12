@@ -36,7 +36,7 @@ export class GoServiceService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': this.getToken()
+        'Authorization': 'Bearer ' + this.getToken()
       })
     };
   }
@@ -164,19 +164,24 @@ export class GoServiceService {
   addCart(productId: number, price: number, userId: number): Observable<string> {
     this.updateHttpOptions();
     const url = this.baseUrl+"saveCart?productId=" + productId + "&price=" + price + "&userId=" + userId;
-    return this.httpClient.post<MessageResponse>(url,{productId, price, userId},this.httpOptions).pipe(map(response => response.result));
+
+    return this.httpClient.post<MessageResponse>(url,this.httpOptions).pipe(map(response => response.result));
+
   }
 
   changeCart(productId: number, quantity: number, cartId: number): Observable<string> {
     this.updateHttpOptions();
     const url = this.baseUrl+"changeCart?cartId=" + cartId + "&quantity=" + quantity + "&productId=" + productId;
-    return this.httpClient.post<MessageResponse>(url,{productId, quantity, cartId},this.httpOptions).pipe(map(response => response.result));
+
+
+    return this.httpClient.post<MessageResponse>(url,this.httpOptions).pipe(map(response => response.result));
+
   }
 
   deleteCart(cartId: number): Observable<string>{
     this.updateHttpOptions();
     const url = this.baseUrl+"deleteCart?cartId=" + cartId;
-    return this.httpClient.delete<MessageResponse>(url).pipe(map(response => response.result));
+    return this.httpClient.delete<MessageResponse>(url,this.httpOptions).pipe(map(response => response.result));
 
   }
 

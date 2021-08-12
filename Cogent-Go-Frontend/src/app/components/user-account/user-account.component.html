@@ -2,5 +2,5 @@
 <a routerLink="/signup" *ngIf="!isLoggedIn">Signup</a>
 <a routerLink="/login" *ngIf="!isLoggedIn">Login</a>
 
-<a routerLink="/accountInfo" *ngIf="isLoggedIn">Your Account</a>
+<a routerLink="/profile" *ngIf="isLoggedIn">Profile</a>
 <button (click)="signOut()" *ngIf="isLoggedIn">Log Out</button>
