@@ -117,7 +117,7 @@ export class GoServiceService {
 
 
   signOut(): void {
-    const query = this.getUser().email + " logged out.";
+    const query = this.getUser().firstName + " logged out.";
     var cust_query = {
       userId: this.getUser().userId,
       firstName: this.getUser().firstName,
@@ -127,7 +127,6 @@ export class GoServiceService {
     };
 
     this.addQuery(cust_query);
-
     window.sessionStorage.clear();
     window.location.reload();
   }
@@ -157,49 +156,19 @@ export class GoServiceService {
 
   addCart(productId: number, price: number, userId: number): Observable<string> {
     this.updateHttpOptions();
-
     const url = this.baseUrl+"saveCart?productId=" + productId + "&price=" + price + "&userId=" + userId;
-    const query = "User #" + userId + " just added Product #" + productId + " to their cart.";
-    var cust_query = {
-      userId: userId,
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-    this.addQuery(cust_query);
-
     return this.httpClient.post<MessageResponse>(url,{productId, price, userId},this.httpOptions).pipe(map(response => response.result));
   }
 
   changeCart(productId: number, quantity: number, cartId: number): Observable<string> {
     this.updateHttpOptions();
     const url = this.baseUrl+"changeCart?cartId=" + cartId + "&quantity=" + quantity + "&productId=" + productId;
-
-    const query = "Cart #" + cartId + " updated: Product ID: " + productId + ", Quantity: " + quantity;
-    var cust_query = {
-      userId: this.getUser().userId,
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-    this.addQuery(cust_query);
     return this.httpClient.post<MessageResponse>(url,{productId, quantity, cartId},this.httpOptions).pipe(map(response => response.result));
   }
 
   deleteCart(cartId: number): Observable<string>{
     this.updateHttpOptions();
     const url = this.baseUrl+"deleteCart?cartId=" + cartId;
-    const query = "Cart #" + cartId + " deleted";
-    var cust_query = {
-      userId: this.getUser().userId,
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-    this.addQuery(cust_query);
     return this.httpClient.delete<MessageResponse>(url).pipe(map(response => response.result));
 
   }
@@ -207,14 +176,6 @@ export class GoServiceService {
 
 
   login(loginForm: any): Observable<any> {
-    const query = loginForm.email + " just logged in.";
-    var cust_query = {
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-    this.addQuery(cust_query);
     return this.httpClient.post(this.baseUrl + 'login', loginForm, this.httpOptions);
   }
 /*
