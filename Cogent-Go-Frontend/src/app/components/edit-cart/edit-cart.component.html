@@ -5,14 +5,31 @@
 
           <div class="col-md-3" *ngFor="let tempCart of cartList">
             <div class="product-box">
-              <a routerLink="/carts/{{tempCart.product.productId}}">
-                <h1>{{ tempCart.product.productId }}</h1>
+
+                <h1>{{ tempCart.product.productName }}</h1>
                 <img src='assets/placeholder.png' class="img-responsive">
-              </a>
-              <h2>Quantity: {{ tempCart.quantity }}</h2>
+
+              <form
+              name="form"
+              >
+                <label for="quantity">Quantity: </label>
+                <input
+                  #quantity
+                  type="number"
+                  class="form-control"
+                  name="quantity"
+                  value="{{ tempCart.quantity }}"
+                  required
+                />
+                <button (click)="changeCart(tempCart.product.productId, quantity.value, tempCart.cartId)">Update Quantity</button>
+              </form>
+
               <div class="price">{{ tempCart.product.price | currency:'USD' }} each</div>
-              <div class="price">{{ tempCart.price | currency:'USD' }}</div>
+              <div class="price">{{ tempCart.price | currency:'USD' }} total</div>
+
+              <button (click)="deleteCart(tempCart.cartId)" class="primary-btn">Remove</button>
             </div>
+            
           </div>
         </div>
       </div>

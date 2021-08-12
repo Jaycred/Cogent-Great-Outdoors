@@ -7,6 +7,7 @@ import { Product } from '../common/product';
 import { Cart } from '../common/cart';
 import { User } from '../common/user';
 import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
+import { DeliveryAddress } from '../common/delivery-address';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -35,7 +36,7 @@ export class GoServiceService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': this.getToken()
+        'Authorization': 'Bearer ' + this.getToken()
       })
     };
   }
@@ -69,6 +70,12 @@ export class GoServiceService {
     this.updateHttpOptions();
     const url = this.baseUrl+"createQuery";
     return this.httpClient.post<MessageResponse>(url,query,this.httpOptions).pipe(map(response => response.result));
+  }
+
+  getAddressById(addressId: number): Observable<DeliveryAddress>{
+    this.updateHttpOptions();
+    const url = this.baseUrl+"getAddress?addressId=" + addressId;
+    return this.httpClient.get<DeliveryAddress>(url);
   }
 
   getProducts(): Observable<Product[]>
@@ -117,7 +124,7 @@ export class GoServiceService {
 
 
   signOut(): void {
-    const query = this.getUser().email + " logged out.";
+    const query = this.getUser().firstName + " logged out.";
     var cust_query = {
       userId: this.getUser().userId,
       firstName: this.getUser().firstName,
@@ -127,7 +134,6 @@ export class GoServiceService {
     };
 
     this.addQuery(cust_query);
-
     window.sessionStorage.clear();
     window.location.reload();
   }
@@ -157,64 +163,31 @@ export class GoServiceService {
 
   addCart(productId: number, price: number, userId: number): Observable<string> {
     this.updateHttpOptions();
-
     const url = this.baseUrl+"saveCart?productId=" + productId + "&price=" + price + "&userId=" + userId;
-    const query = "User #" + userId + " just added Product #" + productId + " to their cart.";
-    var cust_query = {
-      userId: userId,
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-    this.addQuery(cust_query);
 
-    return this.httpClient.post<MessageResponse>(url,{productId, price, userId},this.httpOptions).pipe(map(response => response.result));
+    return this.httpClient.post<MessageResponse>(url,this.httpOptions).pipe(map(response => response.result));
+
   }
 
   changeCart(productId: number, quantity: number, cartId: number): Observable<string> {
     this.updateHttpOptions();
     const url = this.baseUrl+"changeCart?cartId=" + cartId + "&quantity=" + quantity + "&productId=" + productId;
 
-    const query = "Cart #" + cartId + " updated: Product ID: " + productId + ", Quantity: " + quantity;
-    var cust_query = {
-      userId: this.getUser().userId,
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-    this.addQuery(cust_query);
-    return this.httpClient.post<MessageResponse>(url,{productId, quantity, cartId},this.httpOptions).pipe(map(response => response.result));
+
+    return this.httpClient.post<MessageResponse>(url,this.httpOptions).pipe(map(response => response.result));
+
   }
 
   deleteCart(cartId: number): Observable<string>{
     this.updateHttpOptions();
     const url = this.baseUrl+"deleteCart?cartId=" + cartId;
-    const query = "Cart #" + cartId + " deleted";
-    var cust_query = {
-      userId: this.getUser().userId,
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-    this.addQuery(cust_query);
-    return this.httpClient.delete<MessageResponse>(url).pipe(map(response => response.result));
+    return this.httpClient.delete<MessageResponse>(url,this.httpOptions).pipe(map(response => response.result));
 
   }
 
 
 
   login(loginForm: any): Observable<any> {
-    const query = loginForm.email + " just logged in.";
-    var cust_query = {
-      firstName: this.getUser().firstName,
-      lastName: this.getUser().lastName,
-      email: this.getUser().email, 
-      query: query
-    };
-    this.addQuery(cust_query);
     return this.httpClient.post(this.baseUrl + 'login', loginForm, this.httpOptions);
   }
 /*

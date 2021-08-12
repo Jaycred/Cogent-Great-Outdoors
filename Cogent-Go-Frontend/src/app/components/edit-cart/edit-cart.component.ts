@@ -3,6 +3,8 @@ import { Cart } from 'src/app/common/cart';
 import { GoServiceService } from 'src/app/services/go-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/common/product';
+import { Order } from 'src/app/common/order';
+import { CheckoutComponent } from '../checkout/checkout.component';
 
 @Component({
   selector: 'app-edit-cart',
@@ -11,40 +13,58 @@ import { Product } from 'src/app/common/product';
 })
 export class EditCartComponent implements OnInit {
 
+  form: any = {
+    quantity: null,
+    productId: null,
+    cartId: null
+  }
+
+  message:string;
+
+  /*
   id: number;
   cart: Cart;
   product: Product;
   quantity: number;
-  message:string;
-
   cartId: number;
-  userId: number;
+*/
+
+  //userId: number;
   cartList: Cart[];
   constructor(private gs: GoServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(()=>{
+      /*
       this.cartId = +this.route.snapshot.paramMap.get("cartId");
       this.userId = +this.route.snapshot.paramMap.get("userId");
+      */
       this.viewCarts();
+
     });
   }
 
-
-  changeCart(){
-    this.gs.changeCart(this.product.productId, this.quantity, this.cart.cartId).subscribe(data=>{this.message=data});
+  changeCart(productId: number, quantity: string, cartId: number){
+    const newQuantity = parseInt(quantity);
+    this.gs.changeCart(productId, newQuantity, cartId).subscribe(data=>{this.message=data;
+   this.reloadPage()});
   }
 
-  deleteCart(){
-    this.gs.deleteCart(this.cart.cartId).subscribe(data=>{this.message=data});
+  deleteCart(cartId: number){
+    this.gs.deleteCart(cartId).subscribe(data=>{this.message=data;
+   this.reloadPage()});
   }
-
   
 
   viewCarts(){
     this.gs.getCartsByUserId(this.gs.getUser().id).subscribe(data => {this.cartList = data});
   }
 
+  reloadPage(): void
+  {
+    window.location.reload();
+  }
+  /*
   findById(cartId: number){
     this.gs.getCartsById(this.cartId).subscribe(data => {this.cartList = data;});
   }
@@ -52,4 +72,6 @@ export class EditCartComponent implements OnInit {
   findByUserId(userId: number){
     this.gs.getCartsByUserId(this.userId).subscribe(data => {this.cartList = data;})
   }
+  */
+
 }

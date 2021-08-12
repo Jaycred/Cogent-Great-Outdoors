@@ -92,6 +92,10 @@ public class GoService implements UserDetailsService{
 		return userRep.findAll();
 	}
 	
+	public DeliveryAddress getAddressById(int id) {
+		return addressRep.getById(id);
+	}
+	
 	public User login(String email, String password) {
 		Optional<User> user = userRep.findByEmail(email);
 		User u1 = new User();
