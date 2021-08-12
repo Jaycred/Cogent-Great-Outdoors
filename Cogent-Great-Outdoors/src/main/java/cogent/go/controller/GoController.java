@@ -76,6 +76,11 @@ public class GoController {
         return new ResponseEntity<>("Delivery address #" + address.getId() + " was added.", HttpStatus.OK);
     }
 	
+	@GetMapping("/getAddress")
+	public DeliveryAddress getAddressById(@RequestParam("addressId") int id) {
+        return service.getAddressById(id);
+    }
+	
 	@PostMapping("/placeOrder")
     public ResponseEntity<String> addOrder(@RequestBody Order order) {
         service.saveOrder(order);

@@ -7,6 +7,7 @@ import { Product } from '../common/product';
 import { Cart } from '../common/cart';
 import { User } from '../common/user';
 import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
+import { DeliveryAddress } from '../common/delivery-address';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -69,6 +70,12 @@ export class GoServiceService {
     this.updateHttpOptions();
     const url = this.baseUrl+"createQuery";
     return this.httpClient.post<MessageResponse>(url,query,this.httpOptions).pipe(map(response => response.result));
+  }
+
+  getAddressById(addressId: number): Observable<DeliveryAddress>{
+    this.updateHttpOptions();
+    const url = this.baseUrl+"getAddress?addressId=" + addressId;
+    return this.httpClient.get<DeliveryAddress>(url);
   }
 
   getProducts(): Observable<Product[]>

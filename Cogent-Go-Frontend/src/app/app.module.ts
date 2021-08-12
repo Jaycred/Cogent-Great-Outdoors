@@ -22,6 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { EditCartComponent } from './components/edit-cart/edit-cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 const route: Routes = [
@@ -59,7 +60,8 @@ const route: Routes = [
     ProfileComponent,
     AboutComponent,
     ContactComponent,
-    EditCartComponent
+    EditCartComponent,
+    CheckoutComponent
 
   ],
   imports: [
