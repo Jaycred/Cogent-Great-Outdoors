@@ -40,6 +40,7 @@ const route: Routes = [
   {path: 'signup', component: RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'profile', component:ProfileComponent},
+  {path: 'checkout/:cartId', component:CheckoutComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
