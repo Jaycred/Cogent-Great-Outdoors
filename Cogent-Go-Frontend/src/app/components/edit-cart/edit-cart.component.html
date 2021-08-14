@@ -7,7 +7,7 @@
             <div class="product-box">
 
                 <h1>{{ tempCart.product.productName }}</h1>
-                <img src='assets/placeholder.png' class="img-responsive">
+                <img src='assets/{{tempCart.product.productName}}.jpg' class="img-responsive">
 
               <form
               name="form"
@@ -27,7 +27,9 @@
               <div class="price">{{ tempCart.product.price | currency:'USD' }} each</div>
               <div class="price">{{ tempCart.price | currency:'USD' }} total</div>
 
-              <button (click)="deleteCart(tempCart.cartId)" class="primary-btn">Remove</button>
+              <button (click)="deleteCart(tempCart.cartId)" class="primary-btn">Remove </button>
+
+              <button routerLink = "/checkout/{{tempCart.cartId}}">Checkout</button>
             </div>
             
           </div>

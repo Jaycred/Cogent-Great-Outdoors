@@ -1,19 +1,29 @@
+
 <div class="main-content">
     <div class="section-content section-content-p30">
         <div class="container-fluid">
-            <a routerLink="/carts/{{tempCart.product.productId}}">
-                <h1>{{ tempCart.product.productId }}</h1>
-              </a>
+            
+                <h3>Product Id: {{ cart.product.productId }}</h3>
+                <h3>Product Name: {{ cart.product.productName }}</h3>
+                <h3>Price (each): $ {{ cart.product.price }}</h3>
+                <h3>Quantity: {{ cart.quantity }}</h3>
+                <h3>Price (total): $ {{ cart.price }}</h3>
+                <h3>First Name: {{ cart.user.firstName }}</h3>
+                <h3>Last Name: {{ cart.user.lastName }}</h3>
+                <h3>Email: {{ cart.user.email }}</h3>
+        
 
-            <form #addressForm="ngForm" (ngSubmit)="processForm(productForm)">
-                <p>Product Name: <input type="text" id="productName" name="productName" ngModel></p> <br>
-                <p>Description: <input type="text" id="description"  name="description" ngModel></p> <br>
-                <p>Price: <input type="text" id="price"  name="price" ngModel> </p> <br>
-                <p>Category: <input type="text" id="category" name="category" ngModel> </p> <br>
-                <p><input type="submit" value="submit" id="b1_submit" name="b1_submit"></p>
+            <form #addressForm="ngForm" (ngSubmit)="checkout(addressForm)">
+                <p>Address Line 1: <input type="text" id="addressLine1" name="addressLine1" ngModel></p> <br>
+                <p>Address Line 2: <input type="text" id="addressLine2"  name="addressLine2" ngModel></p> <br>
+                <p>State: <input type="text" id="state"  name="state" ngModel> </p> <br>
+                <p>Pincode: <input type="text" id="pincode" name="pincode" ngModel> </p> <br>
+                <p><input type="submit" value="Add Order" id="b1_submit" name="b1_submit"></p>
             </form>
          
             <span id="message">{{this.message}}</span>
+            
         </div>
     </div>
 </div>
+

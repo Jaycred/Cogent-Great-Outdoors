@@ -9,6 +9,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "delivery_address_table", schema = "greatoutdoors")
 public class DeliveryAddress {
@@ -27,6 +32,7 @@ public class DeliveryAddress {
 	private int pincode;
 	
 	@OneToOne(mappedBy = "da")
+	@Fetch(FetchMode.JOIN)
 	private Order order;
 	
 	public DeliveryAddress() {

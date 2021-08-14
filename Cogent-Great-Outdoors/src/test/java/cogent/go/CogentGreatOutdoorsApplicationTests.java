@@ -113,6 +113,7 @@ public class CogentGreatOutdoorsApplicationTests {
 		Cart cart2 = new Cart(newUser, prod2, 5, prod2.getPrice()*5);
 		when(service.getCartByUserId(newUser.getId())).thenReturn(Stream.of(cart1, cart2).collect(Collectors.toList()));
 		assertEquals(cart2, service.getCartByUserId(newUser.getId()).get(1));
+	}
 
   @Test
 	public void getUsersTest() {
@@ -236,3 +237,5 @@ public class CogentGreatOutdoorsApplicationTests {
 		assertEquals(da, service.saveAddress(da));
 	}
 }
+*/
+	}
