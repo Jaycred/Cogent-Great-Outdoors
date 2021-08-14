@@ -130,7 +130,7 @@ public class GoService implements UserDetailsService{
 		}
 		return u1;
 	}
-	//Test push
+	
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
