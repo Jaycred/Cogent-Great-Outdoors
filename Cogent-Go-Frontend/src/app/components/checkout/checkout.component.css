@@ -1,1 +1,18 @@
-h3{font-size: 20px}
+.main-content{
+    margin-top: -10vh;
+}
+h3{
+    font-size: 20px;
+    background-color: lightblue;
+    padding: 1vh;
+    margin-bottom: 2vh;
+}
+.big-br{
+    margin-bottom: 1vh;
+}
+.confirm{
+    font-size: 20px;
+    color: white;
+    background-color: green;
+    padding: 1vh;
+}
