@@ -6,5 +6,5 @@ export class DeliveryAddress {
 	addressLine2:string;
 	state:string;
 	pincode:number;
-	order:Order;
+	order: Order;
 }
