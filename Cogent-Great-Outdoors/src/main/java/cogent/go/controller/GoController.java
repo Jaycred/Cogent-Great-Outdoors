@@ -201,7 +201,14 @@ public class GoController {
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(),
-												 userDetails.getEmail()));
+												 userDetails.getEmail(),
+												 userDetails.getFirstName(),
+												 userDetails.getLastName(),
+												 userDetails.getPhoneNumber(),
+												 userDetails.getAddressLine1(),
+												 userDetails.getAddressLine2(),
+												 userDetails.getState(),
+												 userDetails.getPincode()));
 	}
 
 	@PostMapping("/signup")

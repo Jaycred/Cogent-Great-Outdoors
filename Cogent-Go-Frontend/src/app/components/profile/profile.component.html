@@ -4,14 +4,31 @@
         <strong>Profile</strong> 
       </h3>
     </header>
+    <br>
     <p>
-      <strong>Token:</strong>
-      {{ currentUser.accessToken.substring(0, 20) }} ...
-      {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
+      <strong>Name:</strong>
+      {{ currentUser.firstName }} {{ currentUser.lastName }}
     </p>
     <p>
       <strong>Email:</strong>
       {{ currentUser.email }}
+    </p>
+    <p>
+      <strong>Phone Number:</strong>
+      {{ currentUser.phoneNumber }}
+    </p>
+    <br>
+    <p>
+      <strong>Address:</strong>
+    </p>
+    <p>
+      {{ currentUser.addressLine1 }}
+    </p>
+    <p>
+      {{ currentUser.addressLine2 }}
+    </p>
+    <p>
+      {{ currentUser.state }} {{ currentUser.pincode }}
     </p>
   </div>
   

@@ -94,7 +94,7 @@ public class CogentGreatOutdoorsApplicationTests {
 	}
 	
 	@Test
-	public void getProductByIdTest()
+	public void getProductByIdTest1()
 	{
 		Product prod = new Product(5, "Ski Boots", "Boots for skiing", 23, "MountaineeringEquipment");
 		when(prodRep.findById(5))
@@ -121,9 +121,9 @@ public class CogentGreatOutdoorsApplicationTests {
 				.of(new User("Jaclyn", "Frank", "8765435263", "jfrank@purdue.edu", "JtotheF", "345 First St.", "West Lafayette, IN 47906", "IN", 97636),
 						new User("Clara", "Pauker", "8455365263", "cpauk@purdue.edu", "CPauker", "856 Rise Ave.", "West Lafayette, IN 47906", "IN", 97765)).collect(Collectors.toList()));
 		assertEquals(2, service.getAllUsers().size());
+		
 	}
 
-	/*
 	@Test
 	public void getUserbyIdTest() {
 		int id = 2;
@@ -156,7 +156,7 @@ public class CogentGreatOutdoorsApplicationTests {
 	}
 	
 	@Test
-	public void getProductByCategoryTest() {
+	public void getProductByCategoryTest2() {
 		Product product = new Product(11, "Nike Shoes", "Compatible for playing any sport, including golf", 30, "GolfEquipment");
 		List<Product> prodList = new ArrayList<>();
 		prodList.add(product);
