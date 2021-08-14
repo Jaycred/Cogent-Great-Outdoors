@@ -18,8 +18,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order_table", schema = "greatoutdoors")
+@Table(name = "order_table", schema = "great-outdoors")
 public class Order {
+	//Old Code
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
@@ -79,5 +80,5 @@ public class Order {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+	//Old Code Ends
 }

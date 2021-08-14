@@ -1,9 +1,11 @@
 a {margin: 15px;
     color: white;
-    background-color: blue;
+    background-color: mediumblue;
+    padding: 1vh;
 }
 
 button {margin: 15px;
     color: white;
-    background-color: blue;
+    background-color: mediumblue;
+    padding: 1vh;
 }

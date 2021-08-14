@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "customer_query", schema = "greatoutdoors")
+@Table(name = "customer_query", schema = "great-outdoors")
 public class CustomerQuery {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

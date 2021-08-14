@@ -15,8 +15,9 @@ import org.hibernate.annotations.FetchMode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "delivery_address_table", schema = "greatoutdoors")
+@Table(name = "delivery_address_table", schema = "great-outdoors")
 public class DeliveryAddress {
+	//Old Code
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "address_id")
@@ -89,5 +90,5 @@ public class DeliveryAddress {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
-	
+	//Old Code Ends
 }
