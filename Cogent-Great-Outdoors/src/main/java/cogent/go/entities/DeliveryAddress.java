@@ -1,10 +1,15 @@
 package cogent.go.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -15,7 +20,7 @@ import org.hibernate.annotations.FetchMode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "delivery_address_table", schema = "greatoutdoors")
+@Table(name = "delivery_address_table2", schema = "great-outdoors")
 public class DeliveryAddress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +36,8 @@ public class DeliveryAddress {
 	private String state;
 	private int pincode;
 	
-	@OneToOne(mappedBy = "da")
-	@Fetch(FetchMode.JOIN)
-	private Order order;
+	@OneToMany(mappedBy = "da")
+	private List<Order> orderList;
 	
 	public DeliveryAddress() {
 		super();
