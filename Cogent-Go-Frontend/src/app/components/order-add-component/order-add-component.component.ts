@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoServiceService } from 'src/app/services/go-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order-add-component',
@@ -8,8 +9,10 @@ import { GoServiceService } from 'src/app/services/go-service.service';
 })
 export class OrderAddComponentComponent implements OnInit {
 
+  orderId: number;
+  order: any;
   message: string;
-  constructor(private gs: GoServiceService) { }
+  constructor(private gs: GoServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
