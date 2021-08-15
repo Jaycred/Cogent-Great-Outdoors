@@ -23,6 +23,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { EditCartComponent } from './components/edit-cart/edit-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AddressViewComponent } from './components/address-view/address-view.component';
 
 
 const route: Routes = [
@@ -40,7 +41,8 @@ const route: Routes = [
   {path: 'signup', component: RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'profile', component:ProfileComponent},
-  {path: 'checkout/:cartId', component:CheckoutComponent},
+  {path:'checkout/:cartId', component:CheckoutComponent},
+  {path: 'order/:orderId', component:OrderAddComponentComponent},
   {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
@@ -62,7 +64,8 @@ const route: Routes = [
     AboutComponent,
     ContactComponent,
     EditCartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AddressViewComponent
 
   ],
   imports: [

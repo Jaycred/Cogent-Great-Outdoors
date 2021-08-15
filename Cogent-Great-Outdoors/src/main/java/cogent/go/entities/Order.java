@@ -18,8 +18,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order_table", schema = "greatoutdoors")
+@Table(name = "order_table2", schema = "great-outdoors")
+
 public class Order {
+	//Old Code
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
@@ -32,22 +34,28 @@ public class Order {
 	private Product product;
 	private int quantity;
 	private int price;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "order_address_table", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
+	@ManyToOne
+	@JoinColumn(name = "address_id", referencedColumnName = "address_id")
 	private DeliveryAddress da;
 	
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Order(int orderId, User user, Product product, int quantity, int price) {
+	public Order(int orderId, User user, Product product, int quantity, int price, DeliveryAddress da) {
 		super();
 		this.orderId = orderId;
 		this.user = user;
 		this.product = product;
 		this.quantity = quantity;
 		this.price = price;
+		this.da = da;
+	}
+	public DeliveryAddress getDa() {
+		return da;
+	}
+	public void setDa(DeliveryAddress da) {
+		this.da = da;
 	}
 	public int getOrderId() {
 		return orderId;
@@ -79,5 +87,5 @@ public class Order {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+	//Old Code Ends
 }

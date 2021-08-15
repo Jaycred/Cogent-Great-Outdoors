@@ -1,0 +1,29 @@
+.checkout{
+    font-size: 20px;
+    margin-left: 50vh;
+    position: relative;
+    margin-top: -20vh;
+    padding: 2vh;
+    background-color: black;
+    color: white;
+}
+.delete{
+    font-size: 14px;
+    margin-top: 1vh;
+    margin-left: 2vh;
+    padding: 1vh;
+    background-color: red;
+    color: white;
+}
+.update{
+    font-size: 12px;
+    padding: 1vh;
+    background-color: blue;
+    color: white;
+}
+.product-box{
+    background-color: lightblue;
+    padding: 1vh;
+    margin-right: 50vh;
+}
+

@@ -1,0 +1,16 @@
+h1{
+    font-size: 20px;
+    margin-top: 0vh;
+    margin-left: 10vh;
+    transform: translate(0vh, -8vh);
+    background-color: #eee;
+    padding: 1vh;
+}
+img{
+    height: 20vh;
+    width:fit-content;
+}
+.product-box{
+    background-color: lightblue;
+    margin-right: 50vh;
+}

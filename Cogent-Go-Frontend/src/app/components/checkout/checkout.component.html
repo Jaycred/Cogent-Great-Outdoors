@@ -3,25 +3,37 @@
     <div class="section-content section-content-p30">
         <div class="container-fluid">
             
-                <h3>Product Id: {{ cart.product.productId }}</h3>
-                <h3>Product Name: {{ cart.product.productName }}</h3>
-                <h3>Price (each): $ {{ cart.product.price }}</h3>
-                <h3>Quantity: {{ cart.quantity }}</h3>
-                <h3>Price (total): $ {{ cart.price }}</h3>
-                <h3>First Name: {{ cart.user.firstName }}</h3>
-                <h3>Last Name: {{ cart.user.lastName }}</h3>
-                <h3>Email: {{ cart.user.email }}</h3>
+                <h3>Product Id: {{ cart.product.productId }}<br class="big-br">
+                Product Name: {{ cart.product.productName }}<br class="big-br">
+                Price (each): $ {{ cart.product.price }}<br class="big-br">
+                Quantity: {{ cart.quantity }}<br class="big-br">
+                Price (total): $ {{ cart.price }}<br class="big-br">
+                First Name: {{ cart.user.firstName }}<br class="big-br">
+                Last Name: {{ cart.user.lastName }}<br class="big-br">
+                Email: {{ cart.user.email }}</h3>
         
 
-            <form #addressForm="ngForm" (ngSubmit)="checkout(addressForm)">
+            <form #addressForm="ngForm" (ngSubmit)="addAddress(addressForm)">
                 <p>Address Line 1: <input type="text" id="addressLine1" name="addressLine1" ngModel></p> <br>
                 <p>Address Line 2: <input type="text" id="addressLine2"  name="addressLine2" ngModel></p> <br>
                 <p>State: <input type="text" id="state"  name="state" ngModel> </p> <br>
                 <p>Pincode: <input type="text" id="pincode" name="pincode" ngModel> </p> <br>
-                <p><input type="submit" value="Add Order" id="b1_submit" name="b1_submit"></p>
+
+                <p><input type="submit" value="Add Address" id="b1_submit" name="b1_submit"></p>
+
             </form>
-         
-            <span id="message">{{this.message}}</span>
+
+            <span id="message">{{this.message1}}</span>
+
+            <form #form="ngForm" (ngSubmit)="getAddressIdAndCreateOrder(form)">
+                <p>Address Id: <input type="text" id="addressId" name="addressId" ngModel></p> <br>
+                <p><input type="submit" value="Confirm Address" id="b1_submit" name="b1_submit"></p>
+            </form>
+            
+            <span id="message">{{this.message2}}</span>
+
+
+            <button (click)="addOrder()" class="primary-btn">Add to Order</button>
             
         </div>
     </div>

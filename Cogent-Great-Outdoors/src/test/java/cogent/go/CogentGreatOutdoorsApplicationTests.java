@@ -218,7 +218,8 @@ public class CogentGreatOutdoorsApplicationTests {
 	public void saveOrderTest() {
 		User user = new User("Jaclyn", "Frank", "8765435263", "jfrank@purdue.edu", "JtotheF", "345 First St.", "West Lafayette, IN 47906", "IN", 97636);
 		Product product = new Product(11, "Nike Shoes", "Compatible for playing any sport, including golf", 30, "GolfEquipment");
-		Order order = new Order(1, user, product, 6, 180);
+		DeliveryAddress da = new DeliveryAddress(2, "3724 Arbuckle Dr.", "San Jose, CA 95124", "CA", 87567);
+		Order order = new Order(1, user, product, 6, 180,da);
 		when(orderRep.save(order)).thenReturn(order);
 		assertEquals(order, service.saveOrder(order));
 	}
@@ -236,6 +237,6 @@ public class CogentGreatOutdoorsApplicationTests {
 		when(daRep.save(da)).thenReturn(da);
 		assertEquals(da, service.saveAddress(da));
 	}
+
 }
-*/
-	}
+
