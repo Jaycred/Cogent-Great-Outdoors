@@ -1,4 +1,6 @@
-<div class="container" *ngIf="currentUser; else loggedOut">
+<div class="col-md-12">
+  <div class="card card-container">
+    <div class="container" *ngIf="currentUser; else loggedOut">
     <header class="jumbotron">
       <h3>
         <strong>Profile</strong> 
@@ -35,3 +37,5 @@
   <ng-template #loggedOut>
     Please login.
   </ng-template>
+</div>
+</div>

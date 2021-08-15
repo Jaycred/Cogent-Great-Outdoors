@@ -237,4 +237,6 @@ public class CogentGreatOutdoorsApplicationTests {
 		when(daRep.save(da)).thenReturn(da);
 		assertEquals(da, service.saveAddress(da));
 	}
-	}
+
+}
+

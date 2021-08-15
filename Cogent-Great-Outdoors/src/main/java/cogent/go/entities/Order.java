@@ -19,7 +19,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "order_table2", schema = "great-outdoors")
+
 public class Order {
+	//Old Code
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
@@ -85,5 +87,5 @@ public class Order {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+	//Old Code Ends
 }
