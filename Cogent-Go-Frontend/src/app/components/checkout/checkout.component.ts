@@ -12,11 +12,16 @@ import { Cart } from 'src/app/common/cart';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  address: any = {addressLine1: null, addressLine2: null, state: null, pincode: null, order: null};
+  address: any;
+  addressId: number;
+  form: any = {
+    addressId: 0
+  };
   order: any = {user: null, product: null, quantity: 0, price: 0, da: null };
   cartId: number;
   cart: Cart;
-  message: string;
+  message1: string;
+  message2: string;
   constructor(private gs: GoServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -24,18 +29,26 @@ export class CheckoutComponent implements OnInit {
       this.cartId = +this.route.snapshot.paramMap.get("cartId");
       this.gs.getCartsById(this.cartId).subscribe(data=>{this.cart=data[0]});
     });
-
   }
 
-  checkout(addressForm:any){
+  addAddress(addressForm:any){
+    this.gs.addAddress(JSON.stringify(addressForm.value)).subscribe(data=>{this.message1=data});
+  }
+
+  getAddressIdAndCreateOrder(form: any){
+    this.addressId = +form.value.addressId;
+    console.log(this.addressId);
     this.order.user = this.cart.user;
     this.order.product = this.cart.product;
     this.order.quantity = this.cart.quantity;
     this.order.price = this.cart.price;
-    this.order.da = JSON.stringify(addressForm.value);
-    this.gs.addOrder(JSON.stringify(this.order)).subscribe(data=>{this.message=data});
-    addressForm.value.order = this.order;
-    this.gs.addAddress(JSON.stringify(addressForm.value)).subscribe(data=>{this.message=data});
+    this.gs.getAddressById(this.addressId).subscribe(data=>{this.address=data});
+    console.log(this.address.firstName);
+    this.order.da = this.address;
+  }
+
+  addOrder(){
+    this.gs.addOrder(this.order).subscribe(data=>{this.message2=data});
   }
 
 }

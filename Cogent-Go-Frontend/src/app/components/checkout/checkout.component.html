@@ -13,15 +13,27 @@
                 Email: {{ cart.user.email }}</h3>
         
 
-            <form #addressForm="ngForm" (ngSubmit)="checkout(addressForm)">
+            <form #addressForm="ngForm" (ngSubmit)="addAddress(addressForm)">
                 <p>Address Line 1: <input type="text" id="addressLine1" name="addressLine1" ngModel></p> <br>
                 <p>Address Line 2: <input type="text" id="addressLine2"  name="addressLine2" ngModel></p> <br>
                 <p>State: <input type="text" id="state"  name="state" ngModel> </p> <br>
                 <p>Pincode: <input type="text" id="pincode" name="pincode" ngModel> </p> <br>
-                <p><input class="confirm" type="submit" value="Confirm Order" id="b1_submit" name="b1_submit"></p>
+
+                <p><input type="submit" value="Add Address" id="b1_submit" name="b1_submit"></p>
+
             </form>
-         
-            <span id="message">{{this.message}}</span>
+
+            <span id="message">{{this.message1}}</span>
+
+            <form #form="ngForm" (ngSubmit)="getAddressIdAndCreateOrder(form)">
+                <p>Address Id: <input type="text" id="addressId" name="addressId" ngModel></p> <br>
+                <p><input type="submit" value="Confirm Address" id="b1_submit" name="b1_submit"></p>
+            </form>
+            
+            <span id="message">{{this.message2}}</span>
+
+
+            <button (click)="addOrder()" class="primary-btn">Add to Order</button>
             
         </div>
     </div>
